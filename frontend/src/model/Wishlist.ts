@@ -1,6 +1,5 @@
 export type Wishlist = {
     wishlistId: string,
-    userRole: UserRole,
     name: string,
     wishes: Wish
 }
@@ -11,11 +10,6 @@ export type Wish = {
     status: Status
 }
 
-export enum UserRole {
-    ADMIN = "ADMIN",
-    OWNER = "OWNER",
-    GUEST = "GUEST"
-}
 
 export enum Status {
     RESERVE = "RESERVE",
