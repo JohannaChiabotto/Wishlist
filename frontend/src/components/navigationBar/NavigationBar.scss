@@ -1,0 +1,12 @@
+@import "src/assets/style/Colors";
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
+
+.nav-bar{
+  a{
+    color: $red-1;
+    padding: 20px;
+  }
+  font-family: 'Merienda', cursive;
+  text-align: center;
+  padding-block: 20px;
+}
