@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Service
 public class IdService {
-    @Value("/")
+    @Value("id")
     private String customIdPrefix;
 
     public String generateId()
