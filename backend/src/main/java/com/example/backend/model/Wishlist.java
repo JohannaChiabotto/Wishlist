@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @With
-@Document
+@Document("wishlists")
 public record Wishlist(
         @Id
         String wishlistId,
