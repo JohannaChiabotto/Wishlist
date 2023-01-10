@@ -16,7 +16,7 @@ public class WishlistController {
 
     private final WishlistService wishlistService;
 
-    @Autowired
+
     public WishlistController(WishlistService wishlistService){
         this.wishlistService = wishlistService;
     }
