@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Home from "./pages/home/Home";
+import HomePage from "./pages/home/HomePage";
 import NavigationBar from "./components/navigationBar/NavigationBar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import AddWishlist from "./pages/createWishlist/AddWishlist";
@@ -10,7 +10,7 @@ function App() {
         <BrowserRouter>
             <NavigationBar></NavigationBar>
             <Routes>
-                    <Route path={"/"} element={<Home/>}/>
+                    <Route path={"/"} element={<HomePage/>}/>
                     <Route path={"/create-wishlist"} element={<AddWishlist/>}/>
             </Routes>
         </BrowserRouter>
