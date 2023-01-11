@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Wishlist;
+import com.example.backend.model.WishlistDTO;
 import com.example.backend.repo.WishlistRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,11 @@ public class WishlistService {
     public List<Wishlist> list() { return wishlistRepo.findAll(); }
 
 
-    public Wishlist addWishlist(Wishlist wishlist){
+    public Wishlist addWishlist(WishlistDTO wishlistRequest){
         Wishlist newWishlistWithId = new Wishlist(
                 idService.generateId(),
-                wishlist.name(),
-                wishlist.wishes()
+                wishlistRequest.name(),
+                wishlistRequest.wishes()
         );
         return wishlistRepo.save(newWishlistWithId);
 

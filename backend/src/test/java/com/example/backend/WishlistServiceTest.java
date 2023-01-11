@@ -2,13 +2,13 @@ package com.example.backend;
 
 import com.example.backend.model.Wish;
 import com.example.backend.model.Wishlist;
+import com.example.backend.model.WishlistDTO;
 import com.example.backend.repo.WishlistRepo;
 import com.example.backend.service.IdService;
 import com.example.backend.service.WishlistService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.data.domain.Example;
-import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,8 +18,6 @@ import java.util.List;
 import static org.bson.assertions.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 public class WishlistServiceTest {
@@ -31,7 +29,7 @@ public class WishlistServiceTest {
     @InjectMocks
     private Example example;
 
-    List<Wish>wishes = Collections.emptyList();
+    List<Wish> wishes = Collections.emptyList();
 
     @Test
     void listOfWishlistExpectEmptyList() {
@@ -44,24 +42,24 @@ public class WishlistServiceTest {
     }
 
     @Test
-    void addWishlistTest(){
-
+    void addWishlistTest() {
+//given
+        WishlistDTO wishlistRequest = new WishlistDTO("kind1", wishes);
         Wishlist givenWishlist = new Wishlist("123", "kind1", wishes);
-
+//when
         when(idService.generateId()).thenReturn("123");
         when(wishlistRepo.save(givenWishlist)).thenReturn(givenWishlist);
-        Wishlist result = wishlistService.addWishlist(givenWishlist);
-
+        Wishlist result = wishlistService.addWishlist(wishlistRequest);
+//then
         verify(wishlistRepo).save(givenWishlist);
         assertEquals(givenWishlist, result);
     }
 
 
-
-        @Test
-        public void testConstructor() {
-            assertNotNull(wishlistService);
-        }
+    @Test
+    public void testConstructor() {
+        assertNotNull(wishlistService);
+    }
 
 
     @Test
