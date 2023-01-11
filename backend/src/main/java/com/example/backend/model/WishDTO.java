@@ -1,9 +1,7 @@
 package com.example.backend.model;
 
-public record Wish(
-        String id,
+public record WishDTO(
         String name,
         Status status
-
 ) {
 }
