@@ -76,17 +76,4 @@ public class WishlistServiceTest {
         assertEquals(expectedWishlists, wishlists);
     }
 
-    /*@Test
-    public void testAddWishlistTest() throws Exception {
-        Wishlist wishlist = new Wishlist();
-        wishlist.setName("Test Wishlist");
-        String json = objectMapper.writeValueAsString(wishlist);
-
-        mockMvc.perform(post("/create")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isOk());
-    }
-*/
-
 }
