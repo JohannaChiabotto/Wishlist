@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 
-public class WishlistServiceTest {
+class WishlistServiceTest {
 
     IdService idService = mock(IdService.class);
     WishlistRepo wishlistRepo = mock(WishlistRepo.class);
@@ -52,7 +52,7 @@ public class WishlistServiceTest {
 
 
     @Test
-    public void testList() {
+     void testList() {
         Wishlist w1 = new Wishlist("idtest1", "lala", wishes);
         Wishlist w2 = new Wishlist("idtest2", "lele", wishes);
         List<Wishlist> expectedWishlists = Arrays.asList(w1, w2);

@@ -10,7 +10,7 @@ export default function useWishlists() {
     }, [])
 
     function getWishlists(){
-        axios.get("/create-wishlist")
+        axios.get("/api/wishlist")
             .then(response =>{
                 setWishlists(response.data)
             })

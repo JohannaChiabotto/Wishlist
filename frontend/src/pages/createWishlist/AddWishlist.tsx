@@ -44,14 +44,7 @@ export default function AddWishlist() {
     function submitHandler(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        /*type WishlistType ={
-            name : string,
-            wishes : Wish[]
-        }
-
-        const newWishlist : WishlistType = {name:name, wishes:wishes}*/
-
-        axios.post("/wishlist/create", { name: name, wishes: wishes })
+        axios.post("/api/wishlist", { name: name, wishes: wishes })
 
             .then(response => response.data)
             .then(() => {
