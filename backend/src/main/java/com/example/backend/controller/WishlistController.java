@@ -21,6 +21,8 @@ public class WishlistController {
 
     @PostMapping("/create")
     public Wishlist addWishlist(@RequestBody WishlistDTO wishlistRequest){
+        System.out.println(wishlistRequest);
         return wishlistService.addWishlist(wishlistRequest);
+
     }
 }

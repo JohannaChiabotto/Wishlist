@@ -7,7 +7,7 @@ import Input from "../../components/Input";
 export default function AddWishlist() {
     const [name, setName] = useState('');
     const [wishes, setWishes] = useState([
-        { id: uuid(), name: '', status: '' },
+        { id: uuid(), name: '', status: 'FREE' },
     ]);
     const [wishlist, setWishlist] = useState({ name: name, wishes: wishes });
 
@@ -18,7 +18,7 @@ export default function AddWishlist() {
     function moreWishesHandler() {
         setWishes((prevState) => {
             const newState = [...prevState];
-            newState.push({ id: uuid(), name: '', status: '' });
+            newState.push({ id: uuid(), name: '', status: 'FREE' });
             return newState;
         });
     }
@@ -44,8 +44,14 @@ export default function AddWishlist() {
     function submitHandler(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
+        /*type WishlistType ={
+            name : string,
+            wishes : Wish[]
+        }
 
-        axios.post("/create", { name: name, wishes: wishes })
+        const newWishlist : WishlistType = {name:name, wishes:wishes}*/
+
+        axios.post("/wishlist/create", { name: name, wishes: wishes })
 
             .then(response => response.data)
             .then(() => {
