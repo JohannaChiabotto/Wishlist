@@ -3,13 +3,10 @@ package com.example.backend.controller;
 import com.example.backend.model.Wishlist;
 import com.example.backend.model.WishlistDTO;
 import com.example.backend.service.WishlistService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/wishlist")
+@RequestMapping("/api/wishlist")
 public class WishlistController {
 
     private final WishlistService wishlistService;
@@ -19,9 +16,8 @@ public class WishlistController {
         this.wishlistService = wishlistService;
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public Wishlist addWishlist(@RequestBody WishlistDTO wishlistRequest){
-        System.out.println(wishlistRequest);
         return wishlistService.addWishlist(wishlistRequest);
 
     }

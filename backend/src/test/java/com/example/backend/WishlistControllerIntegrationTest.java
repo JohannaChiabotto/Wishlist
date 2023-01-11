@@ -18,18 +18,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class IntegrationTest {
+class WishlistControllerIntegrationTest {
     @Autowired
     MockMvc mockMvc;
 
-    @Autowired
-    IdService idService;
-    @Autowired
-    WishlistRepo wishlistRepo;
     @Test
     @DirtiesContext
     void when_wishlist_build() throws Exception {
-        mockMvc.perform(post("/wishlist/create")
+        mockMvc.perform(post("/wishlist")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {
