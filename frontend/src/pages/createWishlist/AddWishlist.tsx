@@ -1,52 +1,86 @@
 import {Status, Wish, Wishlist} from "../../model/Wishlist";
-import {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import axios from "axios";
+import uuid from "react-uuid";
+import Input from "../../components/Input";
 
 export default function AddWishlist() {
-    const [name, setName] = useState<string>("")
-    const [wishlist, setWishlist] = useState<Wishlist>()
-    const [wishes, setWishes] = useState<Array<Wish>>([])
+    const [name, setName] = useState('');
+    const [wishes, setWishes] = useState([
+        { id: uuid(), name: '', status: '' },
+    ]);
+    const [wishlist, setWishlist] = useState({ name: name, wishes: wishes });
 
-    function onNameChange(event: ChangeEvent<HTMLInputElement>) {
-        setName(event.target.value)
-    };
+    function changeNameHandler(event: React.FormEvent<HTMLInputElement>) {
+        setName(event.currentTarget.value);
+    }
 
-    function onWishesChange(event: ChangeEvent<HTMLInputElement>) {
-        setWishes((prevState)=> {
+    function moreWishesHandler() {
+        setWishes((prevState) => {
             const newState = [...prevState];
-            newState.push( {id:'123', name:event.target.value, status: Status.FREE});
+            newState.push({ id: uuid(), name: '', status: '' });
             return newState;
-           })
-    };
+        });
+    }
 
-    function onSaveClick() {
-setWishlist( {id:'123', name:name, wishes:wishes})
-        /*
-        axios.post("/create-wishlist", {
-            id: Math.random().toString(),
-            name: name,
-            wishes: wishes
-        })
+    function removeWishHandler(id: string) {
+
+        setWishes((prevState) => {
+            const newState = [...prevState];
+            const filteredState = newState.filter((wish) => wish.id !== id);
+            return filteredState;
+        });
+    }
+
+    function changeWishHandler(event: React.FormEvent<HTMLInputElement>) {
+        const value = event.currentTarget.value;
+        const id = event.currentTarget.id;
+
+        setWishes(
+            wishes.map((wish) => (wish.id === id ? { ...wish, name: value } : wish))
+        );
+    }
+
+    function submitHandler(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+
+        axios.post("/create", { name: name, wishes: wishes })
+
             .then(response => response.data)
-            .then((savedWishlist) => setWishlists(prevState => [prevState, savedWishlist]))
-            .catch(() => console.error())
-
-         */
+            .then(() => {
+                setName('');
+                setWishes([{ id: uuid(), name: '', status: '' }]);
+            })
+            .catch(console.error)
     }
 
     return (
         <div>
-            <div>
-                <label htmlFor="nameOfList">name of list:</label>
-                <input id={"nameOfList"} onChange={onNameChange}/>
-            </div>
-            <div>
-                <label htmlFor="wishes">wish:</label>
-                <input id={"wishes"} onChange={onWishesChange}/>
+            <form onSubmit={submitHandler}>
+                <div>
+                    <label htmlFor="name">Name of List:</label>
+                    <input id="name" value={name} onChange={changeNameHandler} />
                 </div>
-            <div>
-                <button onClick={onSaveClick}>Save</button>
-            </div>
+
+                {wishes.map((wish) => (
+                    <Input
+                        key={wish.id}
+                        id={wish.id}
+                        value={wish.name}
+                        changeWishHandler={changeWishHandler}
+                        removeWishHandler={removeWishHandler}
+                    />
+                ))}
+
+                <div>
+                    <button type="button" onClick={moreWishesHandler}>
+                        more wishes
+                    </button>
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+            <p>{JSON.stringify(wishlist)}</p>
         </div>
-    )
-    }
+    );
+}
