@@ -1,7 +1,7 @@
 package com.example.backend.model;
 
 public record Wish(
-        String id,
+        String wishId,
         String name,
         Status status
 
