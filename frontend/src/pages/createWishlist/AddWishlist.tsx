@@ -1,15 +1,16 @@
-import {Status, Wish, Wishlist} from "../../model/Wishlist";
-import React, {ChangeEvent, useState} from "react";
+import {Wishlist} from "../../model/Wishlist";
+import React, { useState} from "react";
 import axios from "axios";
 import uuid from "react-uuid";
 import Input from "../../components/Input";
 
 export default function AddWishlist() {
+    const emptyWishlist: Wishlist = { name: "", wishes: []}
     const [name, setName] = useState('');
     const [wishes, setWishes] = useState([
         { id: uuid(), name: '', status: 'FREE' },
     ]);
-    const [wishlist, setWishlist] = useState({ name: name, wishes: wishes });
+    const [wishlist, setWishlist] = useState<Wishlist>(emptyWishlist);
 
     function changeNameHandler(event: React.FormEvent<HTMLInputElement>) {
         setName(event.currentTarget.value);
@@ -44,12 +45,12 @@ export default function AddWishlist() {
     function submitHandler(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        axios.post("/api/wishlist", { name: name, wishes: wishes })
+        axios.post("/api/wishlist", wishlist)
 
             .then(response => response.data)
             .then(() => {
                 setName('');
-                setWishes([{ id: uuid(), name: '', status: '' }]);
+                setWishes([{ id: uuid(), name: '', status: 'FREE' }]);
             })
             .catch(console.error)
     }
