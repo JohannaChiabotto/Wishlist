@@ -1,25 +1,25 @@
 import {ChangeEventHandler} from "react";
 
 interface InputProps {
-    id: string;
+    name: string;
     value: string;
     changeWishHandler: ChangeEventHandler<HTMLInputElement>;
     removeWishHandler: (arg1: string) => void;
 }
 
 const Input = (props: InputProps) => {
-    const id = props.id;
+    const name = props.name;
 
     function removeHandler() {
-        console.log('id of input is ', id);
-        props.removeWishHandler(id);
+        console.log('name of input is ', name);
+        props.removeWishHandler(name);
     }
 
     return (
         <div>
             <input
                 value={props.value}
-                id={props.id}
+                id={props.name}
                 onChange={props.changeWishHandler}
             />
 
