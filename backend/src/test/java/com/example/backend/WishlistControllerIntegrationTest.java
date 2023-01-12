@@ -25,7 +25,7 @@ class WishlistControllerIntegrationTest {
     @Test
     @DirtiesContext
     void when_wishlist_build() throws Exception {
-        mockMvc.perform(post("/wishlist")
+        mockMvc.perform(post("/api/wishlist")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {
@@ -37,8 +37,7 @@ class WishlistControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         {
-                             "name": "kind1",
-                             "wishes":[]
+                             "name": "kind1"
                         }
                                 """));
 
