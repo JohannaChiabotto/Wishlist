@@ -1,4 +1,4 @@
-interface NameIdInterface {
+/*interface NameIdInterface {
     id: string,
     name: string,
 }
@@ -8,21 +8,21 @@ export interface Wishlist extends NameIdInterface {
 }
 export interface Wish extends NameIdInterface {
     status: Status
-}
+}*/
 
-/*
+
 export type Wishlist = {
-    wishlistId: string,
+    wishlistId?: string,
     name: string,
-    wishes: Wish
+    wishes: Wish[]
 }
 
 export type Wish = {
+    wishId?: string,
     name: string,
-    wishId: string,
-    status: Status
+    status: "RESERVE"|"BOUGHT"|"FREE"
 }
-*/
+
 
 export enum Status {
     RESERVE = "RESERVE",
