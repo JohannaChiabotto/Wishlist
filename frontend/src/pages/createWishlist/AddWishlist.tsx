@@ -51,6 +51,8 @@ export default function AddWishlist() {
 
             .then(response => response.data)
             .then(() => {
+                setName("")
+                setWishes([])
             })
             .catch(console.error)
     }
