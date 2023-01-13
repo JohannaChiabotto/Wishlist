@@ -25,7 +25,7 @@ export default function AddWishlist() {
         });
     }
 
-    function handleRemoveWishFromList(name: string) {
+    function handleRemoveWishFromListChange(name: string) {
 
         setWishes((prevState) => {
             const newState = [...prevState];
@@ -43,7 +43,7 @@ export default function AddWishlist() {
         );
     }
 
-    function submitHandler(event: React.FormEvent<HTMLFormElement>) {
+    function handleSubmitChange(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const wishlistRequest: Wishlist = { name: name, wishes: wishes}
 
@@ -59,7 +59,7 @@ export default function AddWishlist() {
 
     return (
         <div>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={handleSubmitChange}>
                 <div>
                     <label htmlFor="name">Name of List:</label>
                     <input id="name" value={name} onChange={handleWishlistNameChange} />
@@ -71,7 +71,7 @@ export default function AddWishlist() {
                         name={wish.name}
                         value={wish.name}
                         changeWishHandler={handleWishesChange}
-                        removeWishHandler={handleRemoveWishFromList}
+                        removeWishHandler={handleRemoveWishFromListChange}
                     />
                 ))}
 
