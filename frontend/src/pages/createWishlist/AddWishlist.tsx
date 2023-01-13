@@ -6,7 +6,6 @@ import {Wish} from "../../model/Wish";
 import {WishStatus} from "../../model/WishStatus";
 
 export default function AddWishlist() {
-    const emptyWishlist: Wishlist = { name: "", wishes: []}
 
     const [name, setName] = useState('');
     const [wishes, setWishes] = useState <Wish[]>([
