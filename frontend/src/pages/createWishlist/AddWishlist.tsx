@@ -45,7 +45,7 @@ export default function AddWishlist() {
 
     function handleSubmitChange(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        const wishlistRequest: Wishlist = { name: name, wishes: wishes}
+        const wishlistRequest: Wishlist = { "name": name, "wishes": wishes}
 
         axios.post("/api/wishlist", wishlistRequest)
 
