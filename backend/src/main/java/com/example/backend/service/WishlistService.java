@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WishlistService {
@@ -32,6 +33,19 @@ public class WishlistService {
         );
         return wishlistRepo.save(newWishlistWithId);
 
+    }
+
+    public Wishlist findWishlistById(String id) throws IllegalAccessException {
+        Optional<Wishlist> optionalWishlist = wishlistRepo.findById(id);
+        if (optionalWishlist.isPresent()) {
+            return optionalWishlist.get();
+        }
+        throw new IllegalAccessException("Id not found");
+    }
+
+    public void deleteWishlist(String id) throws IllegalAccessException {
+        Wishlist wishlist = findWishlistById(id);
+        wishlistRepo.delete(wishlist);
     }
 
 }

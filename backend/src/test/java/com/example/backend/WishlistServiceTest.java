@@ -8,10 +8,7 @@ import com.example.backend.service.IdService;
 import com.example.backend.service.WishlistService;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -61,6 +58,20 @@ class WishlistServiceTest {
         List<Wishlist> wishlists = wishlistService.list();
 
         assertEquals(expectedWishlists, wishlists);
+    }
+
+    @Test
+    void delete() throws IllegalAccessException {
+        //GIVEN
+        Wishlist givenWishlist = new Wishlist("testId", "aaa",wishes);
+        doNothing().when(wishlistRepo).delete(givenWishlist);
+        when(wishlistRepo.findById(givenWishlist.wishlistId())).thenReturn(Optional.of(givenWishlist));
+
+        //WHEN
+        wishlistRepo.delete(givenWishlist.withWishlistId("testId"));
+        //THEN
+        verify(wishlistRepo).delete(givenWishlist);
+
     }
 
 

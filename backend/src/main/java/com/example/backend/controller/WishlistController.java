@@ -22,4 +22,9 @@ public class WishlistController {
 
     }
 
+    @DeleteMapping("{id}")
+    public void deleteWishlist(@PathVariable String id) throws IllegalAccessException {
+        wishlistService.deleteWishlist(id);
+    }
+
 }
