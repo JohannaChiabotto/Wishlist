@@ -1,9 +1,6 @@
 import {NavLink} from "react-router-dom";
 import "./NavigationBar.scss";
 
-//type NavigationBarProps = {
-//    logout: () => Promise<string>}
-
 
 export default function NavigationBar(){
 

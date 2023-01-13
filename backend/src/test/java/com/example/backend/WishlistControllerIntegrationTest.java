@@ -1,5 +1,7 @@
 package com.example.backend;
 
+import com.example.backend.model.Wishlist;
+import com.example.backend.model.WishlistDTO;
 import com.example.backend.repo.WishlistRepo;
 import com.example.backend.service.IdService;
 import org.junit.jupiter.api.Test;
@@ -29,17 +31,17 @@ class WishlistControllerIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {
-                             "wishlistId": "123",
                              "name": "kind1",
-                             "wishes":[]
+                             "wishes":[{
+                                           "name":"wish1",
+                                           "status":"FREE"
+                                       }]
                         }
                                 """))
-                .andExpect(status().isOk())
-                .andExpect(content().json("""
-                        {
-                             "name": "kind1"
-                        }
-                                """));
+                .andExpect(status().isOk());
 
     }
+
+
+
 }

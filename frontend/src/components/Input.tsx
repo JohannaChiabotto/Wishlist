@@ -11,7 +11,6 @@ const Input = (props: InputProps) => {
     const name = props.name;
 
     function removeHandler() {
-        console.log('name of input is ', name);
         props.removeWishHandler(name);
     }
 
