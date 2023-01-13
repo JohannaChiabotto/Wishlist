@@ -44,7 +44,7 @@ class WishlistServiceTest {
 
         when(idService.generateId()).thenReturn("123");
         when(wishlistRepo.save(givenWishlist)).thenReturn(givenWishlist);
-        Wishlist result = wishlistService.addWishlist(wishlistRequest);
+        Wishlist result = wishlistService.createWishlist(wishlistRequest);
 
         verify(wishlistRepo).save(givenWishlist);
         assertEquals(givenWishlist, result);

@@ -1,6 +1,5 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.WishDTO;
 import com.example.backend.model.Wishlist;
 import com.example.backend.model.WishlistDTO;
 import com.example.backend.service.WishlistService;
@@ -18,8 +17,8 @@ public class WishlistController {
     }
 
     @PostMapping
-    public Wishlist addWishlist(@RequestBody WishlistDTO wishlistRequest){
-        return wishlistService.addWishlist(wishlistRequest);
+    public Wishlist createWishlist(@RequestBody WishlistDTO wishlistRequest){
+        return wishlistService.createWishlist(wishlistRequest);
 
     }
 

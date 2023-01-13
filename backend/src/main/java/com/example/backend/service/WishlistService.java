@@ -1,7 +1,6 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Wish;
-import com.example.backend.model.WishDTO;
 import com.example.backend.model.Wishlist;
 import com.example.backend.model.WishlistDTO;
 import com.example.backend.repo.WishlistRepo;
@@ -25,7 +24,7 @@ public class WishlistService {
     public List<Wishlist> list() { return wishlistRepo.findAll(); }
 
 
-    public Wishlist addWishlist(WishlistDTO wishlistRequest){
+    public Wishlist createWishlist(WishlistDTO wishlistRequest){
         Wishlist newWishlistWithId = new Wishlist(
                 idService.generateId(),
                 wishlistRequest.name(),
