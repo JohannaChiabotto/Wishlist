@@ -61,7 +61,7 @@ class WishlistServiceTest {
     }
 
     @Test
-    void delete() throws IllegalAccessException {
+    void deleteWishlist() throws IllegalAccessException {
         //GIVEN
         Wishlist givenWishlist = new Wishlist("testId", "aaa",wishes);
         doNothing().when(wishlistRepo).delete(givenWishlist);
@@ -75,7 +75,7 @@ class WishlistServiceTest {
     }
 
     @Test
-    void findById() throws IllegalAccessException {
+    void findWishlistById() throws IllegalAccessException {
 
         //GIVEN
         Wishlist givenWishlist = new Wishlist("testId", "image", wishes);
