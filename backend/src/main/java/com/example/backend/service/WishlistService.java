@@ -1,13 +1,13 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Wish;
+import com.example.backend.model.WishDTO;
 import com.example.backend.model.Wishlist;
 import com.example.backend.model.WishlistDTO;
 import com.example.backend.repo.WishlistRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,19 +29,18 @@ public class WishlistService {
         Wishlist newWishlistWithId = new Wishlist(
                 idService.generateId(),
                 wishlistRequest.name(),
-                AddWishesId(wishlistRequest.wishes())
+                wishlistRequest.wishes().stream().map((wish)-> new Wish(idService.generateId(), wish.name(), wish.status())).toList()
         );
         return wishlistRepo.save(newWishlistWithId);
 
     }
-    
-    public List<Wish> AddWishesId(List<Wish> wishes){
-        List<Wish> wishList = new ArrayList<>();
-        for (Wish wish: wishes) {
-            String wishId = idService.generateId();
-            Wish newWish = new Wish(wishId, wish.name(), wish.status());
-            wishList.add(newWish);
-        }
-        return wishList;
+
+    public Wishlist addWish(WishDTO wish, String wishListId){
+        Wishlist wishlist = wishlistRepo.findById(wishListId).orElseThrow();
+        Wish wishToSave = new Wish(idService.generateId(), wish.name(), wish.status());
+        wishlist.wishes().add(wishToSave);
+        wishlistRepo.save(wishlist);
+        return wishlist;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.model.WishDTO;
 import com.example.backend.model.Wishlist;
 import com.example.backend.model.WishlistDTO;
 import com.example.backend.service.WishlistService;
@@ -20,5 +21,10 @@ public class WishlistController {
     public Wishlist addWishlist(@RequestBody WishlistDTO wishlistRequest){
         return wishlistService.addWishlist(wishlistRequest);
 
+    }
+
+    @PutMapping("/add-wish/{id}")
+    public Wishlist addWish (@PathVariable String id, @RequestBody WishDTO wish){
+        return wishlistService.addWish(wish, id);
     }
 }
