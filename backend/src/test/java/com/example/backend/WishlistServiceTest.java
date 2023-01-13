@@ -74,5 +74,20 @@ class WishlistServiceTest {
 
     }
 
+    @Test
+    void findById() throws IllegalAccessException {
+
+        //GIVEN
+        Wishlist givenWishlist = new Wishlist("testId", "image", wishes);
+        when(wishlistRepo.findById("testId")).thenReturn(Optional.of(givenWishlist));
+
+
+        //WHEN
+        Wishlist result = wishlistService.findWishlistById(givenWishlist.wishlistId());
+        //THEN
+        verify(wishlistRepo).findById(givenWishlist.wishlistId());
+        assertEquals(givenWishlist, result);
+    }
+
 
 }
