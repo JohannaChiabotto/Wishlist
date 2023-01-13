@@ -25,7 +25,7 @@ class WishlistControllerIntegrationTest {
 
     @Test
     @DirtiesContext
-    void when_wishlist_build() throws Exception {
+    void when_wishlist_build_return_wishlistWithId() throws Exception {
         MvcResult newWishlistRequestResult = mockMvc.perform(post("/api/wishlist")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
