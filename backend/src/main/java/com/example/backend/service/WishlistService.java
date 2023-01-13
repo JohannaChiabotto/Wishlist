@@ -35,12 +35,4 @@ public class WishlistService {
 
     }
 
-    public Wishlist addWish(WishDTO wish, String wishListId){
-        Wishlist wishlist = wishlistRepo.findById(wishListId).orElseThrow();
-        Wish wishToSave = new Wish(idService.generateId(), wish.name(), wish.status());
-        wishlist.wishes().add(wishToSave);
-        wishlistRepo.save(wishlist);
-        return wishlist;
-    }
-
 }

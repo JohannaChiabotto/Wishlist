@@ -23,8 +23,4 @@ public class WishlistController {
 
     }
 
-    @PutMapping("/add-wish/{id}")
-    public Wishlist addWish (@PathVariable String id, @RequestBody WishDTO wish){
-        return wishlistService.addWish(wish, id);
-    }
 }
