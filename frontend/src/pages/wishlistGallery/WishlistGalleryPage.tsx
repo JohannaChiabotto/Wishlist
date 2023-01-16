@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {Wishlist} from "../../model/Wishlist";
 import WishlistWrapper from "../../components/wishlistWrapper/WishlistWrapper";
+import axios from "axios";
 
 export default function WishlistGalleryPage(){
     const [wishlists, setWishlists] = useState<Array<Wishlist>>([
@@ -9,7 +10,11 @@ export default function WishlistGalleryPage(){
         { wishlistId: "id3", name: "Raphaela", wishes: []},
     ])
     function getWishlist(){
-       // ...
+        axios.get("/wishlists")
+            .then(response =>{
+                setWishlists(response.data)
+            })
+            .catch(console.error)
     }
 
     function handleDeleteChange(){

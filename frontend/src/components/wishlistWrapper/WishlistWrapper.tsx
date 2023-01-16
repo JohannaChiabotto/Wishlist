@@ -13,18 +13,13 @@ type WishlistProps = {
 }
 export default function WishlistWrapper(props: WishlistProps) {
 
-    const [name, setName] = useState('');
-    const [wishlist, setWishlist] = useState<Wishlist>(
-        {wishlistId: "", name: "", wishes: []},
-    );
+    const id = props.wishlistId;
 
     const handleRemoveWishlistChange = () => {
-        setWishlist((prevWishlist) => {
-            return {
-                ...prevWishlist,
-                wishlistId: ""
-            }
-        });
+        axios.delete(`/wishlist/${id}`)
+            .then(()=> {
+                props.deleteWishlist();
+            }).catch(console.error)
     }
 
     return (
