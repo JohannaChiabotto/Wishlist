@@ -7,6 +7,9 @@ export default function HomePage(){
             <Link to={"/create-wishlist"}>
                 <button> Create your own wishlist</button>
             </Link>
+            <Link to={"/wishlist-gallery"}>
+                <button> See all Wishlists</button>
+            </Link>
 
         </div>
     )
