@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import Container from "../../components/container/Container";
 import Button from "../../components/button/Button";
 
 export default function HomePage(){
