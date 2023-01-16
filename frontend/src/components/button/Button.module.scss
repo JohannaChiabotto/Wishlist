@@ -1,0 +1,12 @@
+@import "src/assets/style/Colors";
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
+
+.Button {
+  background: $red-1;
+  color: gold;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-family: 'Merienda', cursive;
+  text-align: center;
+}
