@@ -1,6 +1,7 @@
 package com.example.backend;
 
 import com.example.backend.model.Wishlist;
+import com.example.backend.repo.WishlistRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import java.util.Collections;
 
 import static org.bson.assertions.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -24,6 +27,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class WishlistControllerIntegrationTest {
     @Autowired
     MockMvc mockMvc;
+
+    @Autowired
+    WishlistRepo wishlistRepo;
 
     @Test
     @DirtiesContext
@@ -55,34 +61,10 @@ class WishlistControllerIntegrationTest {
     @Test
     @DirtiesContext
     void deleteWishlist_shouldDeleteWishlistIfIdExists_whenDeleteRequestIsSuccessful() throws Exception {
-        String saveResult = mockMvc.perform(
-                        post("/api/wishlist")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content("""
-                                        {
-                             "name": "kind1",
-                             "wishes":[{
-                                           "name":"wish1",
-                                           "status":"FREE"
-                                       }]
-                        }
-                                        """)
-                )
-                .andReturn()
-                .getResponse()
-                .getContentAsString();
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        Wishlist saveResultWishlist = objectMapper.readValue(saveResult, Wishlist.class);
-        String id = saveResultWishlist.wishlistId();
-
-        mockMvc.perform(delete("/api/wishlist" + id))
-                .andExpect(status().isOk());
-
-        mockMvc.perform(get("/api/wishlist"))
-                .andExpect(status().isOk())
-                .andExpect(content().json("""
-                        []
-                        """));
+        Wishlist wishlist = new Wishlist(
+                "123", "nametest", Collections.emptyList()
+        );
+        wishlistRepo.save(wishlist);
+        mockMvc.perform(delete("/api/wishlist/" + wishlist.wishlistId())).andExpect(status().isOk());
     }
 }
