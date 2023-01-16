@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.*;
 
 
@@ -88,6 +89,8 @@ class WishlistServiceTest {
         verify(wishlistRepo).findById(givenWishlist.wishlistId());
         assertEquals(givenWishlist, result);
     }
+
+
 
 
 }
