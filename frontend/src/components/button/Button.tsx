@@ -1,8 +1,10 @@
 import style from './Button.module.scss';
-interface ButtonProps {
+import {HTMLAttributes} from "react";
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement>{
     text: string;
     cssClasses?: string;
     onCLickHandler?: () => void;
+    type?: 'submit' | 'reset' | 'button';
 }
 
 
@@ -10,11 +12,13 @@ interface ButtonProps {
 const Button = (props: ButtonProps) => {
 
     function handleClick() {
-        // props.onCLickHandler();
+        if(props.onCLickHandler){
+            props.onCLickHandler();
+        }
     }
 
     return (
-        <button className={style.Button} type="button" onClick={handleClick}>
+        <button type={props.type} className={style.Button} onClick={handleClick}>
             {props.text}
         </button>
     );

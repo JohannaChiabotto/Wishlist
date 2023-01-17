@@ -2,7 +2,7 @@ import React from 'react';
 import HomePage from "./pages/home/HomePage";
 import NavigationBar from "./components/navigationBar/NavigationBar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import AddWishlist from "./pages/createWishlist/AddWishlist";
+import AddWishlist from "./pages/createWishlist/addWishlist/AddWishlist";
 import WishlistGalleryPage from "./pages/wishlistGallery/WishlistGalleryPage";
 import EditWishlistPage from "./pages/editWishlistPage/EditWishlistPage";
 import Container from "./components/container/Container";

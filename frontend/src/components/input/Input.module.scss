@@ -1,0 +1,17 @@
+@import "src/assets/style/Colors";
+
+.Label{
+  display: block;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.Input{
+  font-size: 24px;
+  padding: 0 4px 4px;
+  color: $grey-700;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  border: 1px solid $grey-600;
+  border-bottom: 2px solid $grey-600;
+}
