@@ -1,9 +1,12 @@
-import {Wishlist} from "../../model/Wishlist";
+import {Wishlist} from "../../../model/Wishlist";
 import React, {useState} from "react";
 import axios from "axios";
-import Input from "../../components/Input";
-import {Wish} from "../../model/Wish";
-import {WishStatus} from "../../model/WishStatus";
+import Input from "../../../components/input/Input";
+import {Wish} from "../../../model/Wish";
+import {WishStatus} from "../../../model/WishStatus";
+import Button from "../../../components/button/Button";
+import style from "./AddWishlist.module.scss"
+import MoreWishesInput from "../../../components/moreWishesInput/MoreWishesInput";
 
 export default function AddWishlist() {
 
@@ -24,21 +27,21 @@ export default function AddWishlist() {
         });
     }
 
-    function handleRemoveWishFromListChange(name: string) {
+    function handleRemoveWishFromListChange(id: string) {
 
         setWishes((prevState) => {
             const newState = [...prevState];
-            const filteredState = newState.filter((wish) => wish.name !== name);
+            const filteredState = newState.filter((wish,index) => index !== +id);
             return filteredState;
         });
     }
 
     function handleWishesChange(event: React.FormEvent<HTMLInputElement>) {
         const value = event.currentTarget.value;
-        const name = event.currentTarget.id;
+        const id = event.currentTarget.id;
 
         setWishes(
-            wishes.map((wish) => (wish.name === name ? { ...wish, name: value } : wish))
+            wishes.map((wish, index) => (index === +id ? { ...wish, name: value } : wish))
         );
     }
 
@@ -57,30 +60,29 @@ export default function AddWishlist() {
     }
 
     return (
-        <div>
+        <>
+
+            <h1>Create your whislist:</h1>
+
             <form onSubmit={handleSubmitChange}>
-                <div>
-                    <label htmlFor="name">Name of List:</label>
-                    <input id="name" value={name} onChange={handleWishlistNameChange} />
-                </div>
+
+                <Input id={'name'} label={'Name of List component:'} value={name} changeWishHandler={handleWishlistNameChange}></Input>
 
                 {wishes.map((wish, index) => (
-                    <Input
+                    <MoreWishesInput
                         key={index}
-                        name={wish.name}
+                        id={index.toString()}
                         value={wish.name}
-                        changeWishHandler={handleWishesChange}
-                        removeWishHandler={handleRemoveWishFromListChange}
+                        handleWishesChange={handleWishesChange}
+                        handleWishRemoveChange={handleRemoveWishFromListChange}
                     />
                 ))}
 
                 <div>
-                    <button type="button" onClick={handleAddWishToListChange}>
-                        more wishes
-                    </button>
-                    <button type="submit">Save</button>
+                    <Button type="button" text={'more wishes'} onCLickHandler={handleAddWishToListChange}></Button>
+                    <Button type="submit" text={'Save'}></Button>
                 </div>
             </form>
-        </div>
+        </>
     );
 }

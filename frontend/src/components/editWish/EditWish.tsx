@@ -1,6 +1,8 @@
 import {WishStatus} from "../../model/WishStatus";
-import Input from "../Input";
+import Input from "../input/Input";
 import React from "react";
+import EditWishlistPage from "../../pages/editWishlistPage/EditWishlistPage";
+import MoreWishesInput from "../moreWishesInput/MoreWishesInput";
 
 type EditWishProps = {
     name: string;
@@ -21,12 +23,12 @@ export default function EditWish(props: EditWishProps){
     return(
         <div>
             { props.isUserAdmin?
-                <Input
+                <MoreWishesInput
                     key={props.wishId}
-                    name={props.name}
+                    id={props.name}
                     value={props.name}
-                    changeWishHandler={handleWishesChange}
-                    removeWishHandler={handleRemoveWishFromListChange}
+                    handleWishesChange={handleWishesChange}
+                    handleWishRemoveChange={handleRemoveWishFromListChange}
                 /> :
            <p>{props.name}</p>
             }
