@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.*;
@@ -90,7 +92,28 @@ class WishlistServiceTest {
         assertEquals(givenWishlist, result);
     }
 
+    @Test
+    public void search_testSearchWishlist() {
+        //GIVEN
+        when(wishlistRepo.findAll()).thenReturn(
+                List.of(
+                        new Wishlist("testId1","Samu", wishes),
+                        new Wishlist("testId2","Elli", wishes),
+                        new Wishlist("testId3","Raphaela", wishes)
+
+                )
+        );
+        WishlistService wislistService = new WishlistService(wishlistRepo, idService);
+
+        //WHEN
+        List<Wishlist> actual = wishlistService.search("Ni");
+
+        //THEN
+        assertThat(actual, containsInAnyOrder(
+                new Wishlist("testId1","Samu", wishes)
+        ));
 
 
+    }
 
 }
