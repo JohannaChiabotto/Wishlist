@@ -7,6 +7,7 @@ import com.example.backend.repo.WishlistRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,16 @@ public class WishlistService {
     public void deleteWishlist(String id) throws IllegalAccessException {
         Wishlist wishlist = findWishlistById(id);
         wishlistRepo.delete(wishlist);
+    }
+
+    public List<Wishlist> search(String s) {
+        List<Wishlist> searchResultList = new ArrayList<>();
+        for (Wishlist wishlist : list()) {
+            if (wishlist.name().contains(s)) {
+                searchResultList.add(wishlist);
+            }
+        }
+        return searchResultList;
     }
 
 }
