@@ -1,9 +1,10 @@
+@import "src/assets/style/Variables";
 
 .Card {
   width: 100%;
-  padding: 20px;
+  padding: 32px 20px;
   margin: 0 auto;
-  background: white;
-  border-radius: 4px;
-  margin-bottom: 16px;
+  background: $grey-50;
+  margin-bottom: 20px;
+  outline: 3px solid $brown;
 }
