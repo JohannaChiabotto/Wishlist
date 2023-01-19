@@ -1,11 +1,15 @@
-@import "src/assets/style/Colors";
+@import "src/assets/style/Variables";
 @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
-
-.InputWrapper {
-  margin-right: 16px;
-}
 
 .MoreWishList {
   display: flex;
   width: 100%;
+  margin-top: 16px;
 }
+
+.InputWrapper {
+  width: 100%;
+  margin-right: 12px;
+}
+
+

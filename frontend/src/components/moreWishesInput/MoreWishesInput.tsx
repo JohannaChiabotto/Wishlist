@@ -24,7 +24,7 @@ const MoreWishesInput = (props: MoreWishesInputProps) => {
             <div className={style.InputWrapper}>
             <Input id={props.id}  changeWishHandler={props.handleWishesChange} value={props.value}></Input>
             </div>
-            <Button type="button"  onCLickHandler={removeHandler}>
+            <Button type="button" red={true} fixed={true} onCLickHandler={removeHandler}>
                 <ImBin></ImBin>
             </Button>
         </div>
