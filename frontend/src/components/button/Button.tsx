@@ -21,9 +21,7 @@ const Button = (props: ButtonProps) => {
     return (
         <button type={props.type}
                 className={`${style.Button} ${props.red ? style.ButtonRed : ''} ${props.fixed ? style.ButtonFixed  : ''}`}
-                onClick={handleClick}
-        disabled={props.red}>
-
+                onClick={handleClick}>
             {props.children}
         </button>
     );
