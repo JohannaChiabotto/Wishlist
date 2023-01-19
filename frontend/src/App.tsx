@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import WishlistGalleryPage from "./pages/wishlistGallery/WishlistGalleryPage";
 import EditWishlistPage from "./pages/editWishlistPage/EditWishlistPage";
 import Container from "./components/container/Container";
+import GithubRedirectPage from "./pages/createWishlist/githubRedirectPage/GithubRedirectPage";
 import LoginOrRegister from "./pages/loginOrRegister/LoginOrRegister";
 import CreateWishlistPage from "./pages/createWishlist/CreateWishlistPage";
 
@@ -20,6 +21,7 @@ function App() {
                     <Route path={"/wishlist/:id"} element={<EditWishlistPage/>}/>
                     <Route path={"/login"} element={<LoginOrRegister/>}/>
                     <Route path={"*"} element={<Home/>}/>
+                    <Route path={"/users/oauth/github"} element={<GithubRedirectPage/>}/>
                 </Routes>
             </Container>
         </BrowserRouter>
