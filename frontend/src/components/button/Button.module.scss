@@ -1,14 +1,38 @@
-@import "src/assets/style/Colors";
-@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
+@import "src/assets/style/Variables";
 
 .Button {
-  background: $red;
-  color: $grey-100;
+  width: 100%;
+  background: $green;
+  color: $yellow;
   border: 0;
-  border-radius: 8px;
-  padding: 8px 24px;
-  font-family: 'Merienda', cursive;
-  font-size: 20px;
+  height: 44px;
+  border-radius: 4px;
+  padding: 0 12px;
+  font-family: 'Lobster', cursive;
+  font-size: 22px;
+  line-height: 44px;
   text-align: center;
   cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+
+  @media (min-width: $mobile ) {
+    width: auto;
+  }
+  
+  &:hover {
+    background: $dark-green;
+  }
+}
+
+.ButtonFixed {
+    width: auto;
+}
+
+.ButtonRed {
+  background: $red;
+
+  &:hover {
+    background: $dark-red;
+  }
 }
