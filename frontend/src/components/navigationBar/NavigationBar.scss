@@ -1,26 +1,59 @@
-@import "src/assets/style/Colors";
-@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
+@import "src/assets/style/Variables";
 
-.nav-bar{
+.nav-bar {
   background: $red;
-  font-family: 'Merienda', cursive;
+  font-family: 'Lobster', cursive;
   text-align: center;
-  padding-block: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 20px;
+  height: 70px;
+  position: relative;
+  outline: 3px solid $dark-red;
 
-  a{
-    color: $white;
-    padding: 20px;
+  &:after, &:before{
+    content: '';
+    display: block;
+    width: 20px;
+    border:35px solid $dark-red;
+    z-index: -1;
+    position: absolute;
+    top:15px;
+  }
+
+ &:before{
+   left: -55px;
+   border-left-color: $yellow;
+  }
+  &:after{
+   right: -55px;
+    border-right-color: $yellow;
+  }
+
+
+  a {
+    color: $yellow;
     text-decoration: none;
+    padding: 8px 12px;
+    font-size: 22px;
+
+    &:hover {
+      background: $dark-red;
+    }
+  }
+
+  .logo {
+    font-size: 24px;
+    color: $yellow;
+    display: inline-flex;
+
+    .icon {
+      margin: -4px 4px 0 0;
+      font-size: 34px;
+    }
   }
 }
 
-.logo{
-  font-size: 24px;
-  color: $white;
-  display: inline-flex;
-}
 
-.icon{
-  margin: -4px 4px 0 0;
-  font-size: 34px;
-}
+
