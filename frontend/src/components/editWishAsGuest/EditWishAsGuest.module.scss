@@ -1,0 +1,13 @@
+@import "src/assets/style/Variables";
+
+.EditWishAsGuest {
+  border-bottom: 2px solid $brown;
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}

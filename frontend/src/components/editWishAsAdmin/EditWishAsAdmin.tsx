@@ -8,7 +8,7 @@ type EditWishProps = {
     isUserAdmin:boolean;
     wishId:string
 }
-export default function EditWish(props: EditWishProps){
+export default function EditWishAsAdmin(props: EditWishProps){
 
     function handleRemoveWishFromListChange(name: string) {
 
@@ -31,7 +31,7 @@ export default function EditWish(props: EditWishProps){
            <p>{props.name}</p>
             }
 
-            <select name="cars" id="cars">
+            <select name="status" id="status">
                 <option selected={props.status === 'FREE'} value="FREE">free</option>
                 <option  selected={props.status === 'BOUGHT'} value="BOUGHT">bought</option>
                 <option  selected={props.status === 'RESERVE'} value="RESERVE">reserved</option>

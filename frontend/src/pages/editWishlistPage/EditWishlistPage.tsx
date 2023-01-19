@@ -1,9 +1,13 @@
 import React, {useState} from "react";
 import {WishStatus} from "../../model/WishStatus";
 import {Wishlist} from "../../model/Wishlist";
-import EditWish from "../../components/editWish/EditWish";
+import EditWishAsAdmin from "../../components/editWishAsAdmin/EditWishAsAdmin";
 import axios from "axios";
 import {User} from "../../model/User";
+import Card from "../../components/card/Card";
+import Button from "../../components/button/Button";
+import Input from "../../components/input/Input";
+import EditWishAsGuest from "../../components/editWishAsGuest/EditWishAsGuest";
 
 export default function EditWishlistPage() {
     const [user, setUser] = useState<User>(User.ADMIN);
@@ -35,36 +39,35 @@ export default function EditWishlistPage() {
 
     }
 
-    const interfaceIfAdmin = <div>
-        <div>
-            <label htmlFor="name">Name of List:</label>
-            <input id="name" value={wishlist.name} onChange={handleWishlistNameChange}/>
-        </div>
+    const interfaceIfAdmin = <>
+        <Input id='name' label='Name of List:' changeWishHandler={handleWishlistNameChange}
+               value={wishlist.name}></Input>
         <ul>
-            {wishlist.wishes.map(wish => <EditWish isUserAdmin={true} wishId={wish.wishId!} status={wish.status}
-                                                   key={wish.wishId}
-                                                   name={wish.name}/>)}
+            {wishlist.wishes.map(wish => <EditWishAsAdmin isUserAdmin={true} wishId={wish.wishId!} status={wish.status}
+                                                          key={wish.wishId}
+                                                          name={wish.name}/>)}
         </ul>
-    </div>;
+    </>;
 
-    const interfaceIfGuest = <div>
-        <div>
-            <p>{wishlist.name}</p>
-        </div>
+    const interfaceIfGuest = <>
+        <h2>{wishlist.name}</h2>
         <ul>
-            {wishlist.wishes.map(wish => <EditWish isUserAdmin={false}
-                                                   wishId={wish.wishId!}
-                                                   status={wish.status}
-                                                   key={wish.wishId}
-                                                   name={wish.name}/>)}
+            {wishlist.wishes.map(wish => <EditWishAsGuest
+                status={wish.status}
+                name={wish.name}/>)}
         </ul>
-    </div>;
+    </>;
 
     return (<div>
-            <p>Wihlist edit page</p>
-            {user === User.ADMIN ? interfaceIfAdmin : interfaceIfGuest}
-            {user === User.ADMIN ?? <button>delete Wishlist</button> }
-            <button onClick={handleSaveEditedWishlistChange}>save</button>
+            <h1>Wihlist edit page</h1>
+            <Card>
+                {user === User.ADMIN ? interfaceIfAdmin : interfaceIfGuest}
+                {user === User.ADMIN ?? <button>delete Wishlist</button>}
+                <Button onCLickHandler={handleSaveEditedWishlistChange}>save</Button>
+            </Card>
+
+            <Button onCLickHandler={() => setUser(User.ADMIN)}>as admin</Button>
+            <Button onCLickHandler={() => setUser(User.GUEST)}>as guest</Button>
         </div>
     )
 
