@@ -103,7 +103,7 @@ class WishlistServiceTest {
 
                 )
         );
-        WishlistService wislistService = new WishlistService(wishlistRepo, idService);
+        WishlistService wislistService = new WishlistService(WishlistRepo, IdService);
 
         //WHEN
         List<Wishlist> actual = wishlistService.search("Ni");
@@ -112,7 +112,6 @@ class WishlistServiceTest {
         assertThat(actual, containsInAnyOrder(
                 new Wishlist("testId1","Samu", wishes)
         ));
-
 
     }
 
