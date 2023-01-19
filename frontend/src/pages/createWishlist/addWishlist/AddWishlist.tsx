@@ -5,8 +5,8 @@ import Input from "../../../components/input/Input";
 import {Wish} from "../../../model/Wish";
 import {WishStatus} from "../../../model/WishStatus";
 import Button from "../../../components/button/Button";
-import style from "./AddWishlist.module.scss"
 import MoreWishesInput from "../../../components/moreWishesInput/MoreWishesInput";
+import Card from "../../../components/card/Card";
 
 export default function AddWishlist() {
 
@@ -64,6 +64,7 @@ export default function AddWishlist() {
 
             <h1>Create your whislist:</h1>
 
+            <Card>
             <form onSubmit={handleSubmitChange}>
 
                 <Input id={'name'} label={'Name of List component:'} value={name} changeWishHandler={handleWishlistNameChange}></Input>
@@ -79,10 +80,11 @@ export default function AddWishlist() {
                 ))}
 
                 <div>
-                    <Button type="button" text={'more wishes'} onCLickHandler={handleAddWishToListChange}></Button>
-                    <Button type="submit" text={'Save'}></Button>
+                    <Button type="button"  onCLickHandler={handleAddWishToListChange}>more wishes</Button>
+                    <Button type="submit" >Save</Button>
                 </div>
             </form>
+            </Card>
         </>
     );
 }

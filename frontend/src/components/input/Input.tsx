@@ -1,7 +1,7 @@
-import React, {ChangeEventHandler} from "react";
+import React, {ChangeEventHandler, HTMLAttributes} from "react";
 import style from "./Input.module.scss";
 
-interface InputProps {
+interface InputProps extends HTMLAttributes<HTMLInputElement> {
     label?: string;
     id: string;
     value: string;

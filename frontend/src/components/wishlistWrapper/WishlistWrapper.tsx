@@ -1,8 +1,9 @@
-import {Wishlist} from "../../model/Wishlist";
-import React, {useState} from "react";
+import React from "react";
 import axios from "axios";
 import {Wish} from "../../model/Wish";
-import {NavLink, redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import Button from "../button/Button";
+import './wishlistwrapper.scss';
 
 
 type WishlistProps = {
@@ -23,14 +24,14 @@ export default function WishlistWrapper(props: WishlistProps) {
     }
 
     return (
-        <div style={{border: '1px solid black', display: 'flex', justifyContent: 'space-between'}}>
-            <div>
-                <p>{props.name}</p>
-            </div>
-            <div>
+        <div className="wrapper">
+                <h2>{props.name}</h2>
+
+            <div className="buttonWrapper">
                 <NavLink to={"/wishlist"+props.wishlistId}>
-                    <button >edit</button></NavLink>
-                <button onClick={() => handleRemoveWishlistChange()}>delete</button>
+                    <Button >edit</Button>
+                </NavLink>
+                <Button onClick={() => handleRemoveWishlistChange()}>delete</Button>
             </div>
         </div>
     )
