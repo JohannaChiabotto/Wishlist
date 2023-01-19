@@ -1,7 +1,5 @@
 import {WishStatus} from "../../model/WishStatus";
-import Input from "../input/Input";
 import React from "react";
-import EditWishlistPage from "../../pages/editWishlistPage/EditWishlistPage";
 import MoreWishesInput from "../moreWishesInput/MoreWishesInput";
 
 type EditWishProps = {
