@@ -1,7 +1,8 @@
 import {ChangeEventHandler} from "react";
 import Input from "../input/Input";
 import Button from "../button/Button";
-
+import {ImBin} from "react-icons/im";
+import style from './MoreWishesInput.module.scss';
 
 interface MoreWishesInputProps {
     id: string;
@@ -19,12 +20,12 @@ const MoreWishesInput = (props: MoreWishesInputProps) => {
 
 
     return (
-        <div>
-
-            <Input id={props.id} changeWishHandler={props.handleWishesChange} value={props.value}></Input>
-
-            <Button text={'delete'} type="button" onCLickHandler={removeHandler}>
-
+        <div className={style.MoreWishList}>
+            <div className={style.InputWrapper}>
+            <Input id={props.id}  changeWishHandler={props.handleWishesChange} value={props.value}></Input>
+            </div>
+            <Button type="button"  onCLickHandler={removeHandler}>
+                <ImBin></ImBin>
             </Button>
         </div>
     );
