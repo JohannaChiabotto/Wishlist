@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {WishStatus} from "../../model/WishStatus";
 import {Wishlist} from "../../model/Wishlist";
 import EditWishAsAdmin from "./editWishAsAdmin/EditWishAsAdmin";
@@ -21,30 +21,30 @@ export default function EditWishlistPage() {
         ]
     });
 
-    function handleWishStatusChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const handleWishStatusChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
         const id = event.target.id.replace('select-', '');
         setWishlist(prevState => {
             const newState = {...prevState};
             newState.wishes[+id].status = event.target.value as WishStatus;
             return newState;
         })
-    }
+    }, []);
 
-    function handleRemoveWishFromListChange(id: string) {
+    const handleRemoveWishFromListChange = useCallback((id: string) => {
         setWishlist((prevState) => {
             const copyOfWishes = [...prevState.wishes]
             const filteredWishes = copyOfWishes.filter((wish, index) => index !== +id);
-            return  {...prevState, wishes: filteredWishes};
+            return {...prevState, wishes: filteredWishes};
         });
-    }
+    }, []);
 
-    function handleWishlistNameChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const handleWishlistNameChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         setWishlist(prevState => {
             return {...prevState, name: event.target.value}
         });
-    }
+    }, []);
 
-    function handleWishesNameChange(event: React.FormEvent<HTMLInputElement>) {
+    const handleWishesNameChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
         event.stopPropagation();
         const value = event.currentTarget.value;
         const id: number = +event.currentTarget.id;
@@ -56,11 +56,11 @@ export default function EditWishlistPage() {
                 return {...prevState, wishes: copyWishes};
             }
         );
-    }
+    }, [])
 
-    function handleSaveEditedWishlistChange() {
-
-    }
+    const handleSaveEditedWishlistChange = useCallback(() => {
+        //  saving stuff to database
+    }, []);
 
     const interfaceIfAdmin = <>
         <Input id='name' label='Name of List:' changeWishHandler={handleWishlistNameChange}
@@ -96,18 +96,18 @@ export default function EditWishlistPage() {
     </>;
 
     return (<>
-        <div className={style.ButtonWrapper}>
-            <Button onCLickHandler={() => setUser(User.ADMIN)}>views as admin</Button>
-            <Button onCLickHandler={() => setUser(User.GUEST)}>views as guest</Button>
-        </div>
+            <div className={style.ButtonWrapper}>
+                <Button onCLickHandler={() => setUser(User.ADMIN)}>views as admin</Button>
+                <Button onCLickHandler={() => setUser(User.GUEST)}>views as guest</Button>
+            </div>
 
             <h1>Wihlist edit page</h1>
             <Card>
                 {user === User.ADMIN ? interfaceIfAdmin : interfaceIfGuest}
 
                 <div className={style.ButtonWrapper}>
-                {user === User.ADMIN ? <Button red={true}>delete Wishlist</Button> : null}
-                <Button onCLickHandler={handleSaveEditedWishlistChange}>save</Button>
+                    {user === User.ADMIN ? <Button red={true}>delete Wishlist</Button> : null}
+                    <Button onCLickHandler={handleSaveEditedWishlistChange}>save</Button>
                 </div>
             </Card>
         </>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import style from '../LoginOrRegister.module.scss';
 import Button from "../../../components/button/Button";
 import Input from "../../../components/input/Input";
@@ -15,7 +15,7 @@ export default function Register(props: RegisterProps) {
         samePassword: '',
     });
 
-    function handleRegisterChange(event: React.FormEvent<HTMLInputElement>) {
+    const handleRegisterChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
         const value = event.currentTarget.value;
         const id = event.currentTarget.id;
 
@@ -43,26 +43,19 @@ export default function Register(props: RegisterProps) {
                 break;
         }
 
-    }
+    }, []);
 
-    function handleSubmitLoginChange(event: React.FormEvent<HTMLFormElement>) {
+    const handleSubmitLoginChange = useCallback((event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+    }, [])
 
-
-        /*
-       axios.post("/api/...", wishlistRequest)
-            .then()
-            .catch(console.error)
-            */
-    }
-
-    function redirectToLogin() {
+    const redirectToLogin = useCallback(() => {
         props.handleTypeOfUser(true);
-    }
-
+    }, []);
 
     return (
-        <div><h2 className={style.Subtitle}>Register</h2>
+        <>
+            <h2 className={style.Subtitle}>Register</h2>
 
             <div className={style.Wrapper}>
                 <div className={style.WrapperForm}>
@@ -93,9 +86,7 @@ export default function Register(props: RegisterProps) {
                     <p>Do you already have an username and password?</p>
                     <Button type="button" onCLickHandler={redirectToLogin}>go to login</Button></div>
             </div>
-        </div>
-
-
+        </>
     );
 }
 
