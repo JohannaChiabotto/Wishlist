@@ -1,10 +1,10 @@
 import React from "react";
 import axios from "axios";
-import {Wish} from "../../model/Wish";
+import {Wish} from "../../../model/Wish";
 import {NavLink} from "react-router-dom";
-import Button from "../button/Button";
+import Button from "../../../components/button/Button";
 import style from './wishlistwrapper.module.scss';
-import {WishStatus} from "../../model/WishStatus";
+import {WishStatus} from "../../../model/WishStatus";
 
 
 type WishlistProps = {
