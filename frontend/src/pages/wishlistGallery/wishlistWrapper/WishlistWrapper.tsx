@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import axios from "axios";
 import {Wish} from "../../../model/Wish";
 import {NavLink} from "react-router-dom";
@@ -21,12 +21,12 @@ export default function WishlistWrapper(props: WishlistProps) {
     const reservedWishes = wishes.filter(wish => wish.status === WishStatus.RESERVE);
     const boughtWishes = wishes.filter(wish => wish.status === WishStatus.BOUGHT);
 
-    const handleRemoveWishlistChange = () => {
+    const handleRemoveWishlistChange = useCallback(() => {
         axios.delete(`/wishlist/${id}`)
             .then(() => {
                 props.deleteWishlist();
             }).catch(console.error)
-    }
+    },[]);
 
     return (
         <div className={style.Wrapper}>
@@ -36,10 +36,10 @@ export default function WishlistWrapper(props: WishlistProps) {
                 <p> {freeWishes.length} free - {reservedWishes.length} reserved - {boughtWishes.length} bought </p>
             </div>
             <div className={style.ButtonWrapper}>
-                <NavLink to={"/wishlist" + props.wishlistId}>
+                <NavLink to={"/wishlist/" + props.wishlistId}>
                     <Button>edit</Button>
                 </NavLink>
-                <Button onClick={() => handleRemoveWishlistChange()}>delete</Button>
+                <Button onClick={handleRemoveWishlistChange}>delete</Button>
             </div>
         </div>
     )

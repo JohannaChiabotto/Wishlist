@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import style from '../LoginOrRegister.module.scss';
 import Button from "../../../components/button/Button";
 import Input from "../../../components/input/Input";
@@ -14,8 +14,7 @@ export default function Login(props: LoginProps) {
         password: '',
     });
 
-
-    function handleLoginChange(event: React.FormEvent<HTMLInputElement>) {
+    const handleLoginChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
         const value = event.currentTarget.value;
         const id = event.currentTarget.id;
 
@@ -28,28 +27,20 @@ export default function Login(props: LoginProps) {
                 return {...prevState, password: value}
             });
         }
-    }
+    }, []);
 
-    function handleSubmitLoginChange(event: React.FormEvent<HTMLFormElement>) {
+    const handleSubmitLoginChange = useCallback((event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
+    }, []);
 
-        /*
-       axios.post("/api/...", wishlistRequest)
-            .then()
-            .catch(console.error)
-            */
-    }
-
-    function redirectToRegister() {
+    const redirectToRegister = useCallback(() => {
         props.handleTypeOfUser(false);
-    }
+    }, []);
 
 
     return (
-
-        <div><h2 className={style.Subtitle}>login</h2>
-
+        <><h2 className={style.Subtitle}>login</h2>
             <div className={style.Wrapper}>
                 <div className={style.WrapperForm}>
                     <form onSubmit={handleSubmitLoginChange}>
@@ -73,8 +64,7 @@ export default function Login(props: LoginProps) {
                     <Button type="button" onCLickHandler={redirectToRegister}>go to register</Button>
                 </div>
             </div>
-        </div>
-
+        </>
     );
 }
 
