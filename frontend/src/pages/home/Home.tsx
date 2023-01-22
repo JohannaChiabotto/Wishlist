@@ -1,11 +1,13 @@
-import Card from "../../../components/card/Card";
-import {Link} from "react-router-dom";
-import Button from "../../../components/button/Button";
-import style from './HomeLoggedIn.module.scss';
+import Container from "../../components/container/Container";
 
-export default function HomeLoggedIn() {
+import Card from "../../components/card/Card";
+import style from "./Home.module.scss";
+import {Link} from "react-router-dom";
+import Button from "../../components/button/Button";
+
+export default function Home() {
     return (
-        <>
+        <Container>
             <h1>Welcome back, Username</h1>
             <Card>
                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
@@ -20,6 +22,6 @@ export default function HomeLoggedIn() {
                     </Link>
                 </div>
             </Card>
-        </>
-    );
+        </Container>
+    )
 }
