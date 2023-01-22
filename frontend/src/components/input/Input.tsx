@@ -6,6 +6,7 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
     id: string;
     value: string;
     changeWishHandler: ChangeEventHandler<HTMLInputElement>;
+    password?: boolean
 }
 
 const Input = (props: InputProps) => {
@@ -17,6 +18,7 @@ const Input = (props: InputProps) => {
                 value={props.value}
                 id={props.id}
                 className={style.Input}
+                type={props.password ? 'password' : 'text'}
                 onChange={props.changeWishHandler}
             />
         </>
