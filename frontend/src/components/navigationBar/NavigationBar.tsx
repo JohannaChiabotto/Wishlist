@@ -18,7 +18,6 @@ export default function NavigationBar(){
             <NavLink to={"/"}>Home</NavLink>
             <NavLink to={"/create-wishlist"}>Add</NavLink>
             <NavLink to={"/wishlist-gallery"}>Wishlists</NavLink>
-            <NavLink to={"/wishlist/id123example"}>Edit</NavLink>
             <NavLink to={"/login"} >Login</NavLink>
             <NavLink to={"/login"} >Logout</NavLink>
             </div>
