@@ -7,6 +7,7 @@ import Card from "../../components/card/Card";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import EditWishAsGuest from "./editWishAsGuest/EditWishAsGuest";
+import style from "./EditWishlistPage.module.scss"
 
 export default function EditWishlistPage() {
     const [user, setUser] = useState<User>(User.ADMIN);
@@ -33,8 +34,7 @@ export default function EditWishlistPage() {
         setWishlist((prevState) => {
             const copyOfWishes = [...prevState.wishes]
             const filteredWishes = copyOfWishes.filter((wish, index) => index !== +id);
-            const newState = {...prevState, wishes: filteredWishes};
-            return newState;
+            return  {...prevState, wishes: filteredWishes};
         });
     }
 
@@ -45,16 +45,15 @@ export default function EditWishlistPage() {
     }
 
     function handleWishesNameChange(event: React.FormEvent<HTMLInputElement>) {
+        event.stopPropagation();
         const value = event.currentTarget.value;
-        const id = event.currentTarget.id;
-        console.log(value, id)
+        const id: number = +event.currentTarget.id;
 
         setWishlist(prevState => {
                 const copyState = {...prevState};
-                const copyWishes = [...copyState.wishes]
-                copyWishes.map((wish, index) => (index === +id ? {...wish, name: value} : wish))
-                const newState = {...prevState, wishes: copyWishes};
-                return newState;
+                const copyWishes = [...copyState.wishes];
+                copyWishes[id].name = value;
+                return {...prevState, wishes: copyWishes};
             }
         );
     }
@@ -68,7 +67,6 @@ export default function EditWishlistPage() {
                value={wishlist.name}></Input>
         <ul>
             {wishlist.wishes.map((wish, index) => <EditWishAsAdmin
-                    isUserAdmin={true}
                     wishId={wish.wishId!}
                     status={wish.status}
                     key={wish.wishId}
@@ -97,18 +95,21 @@ export default function EditWishlistPage() {
         </ul>
     </>;
 
-    return (<div>
+    return (<>
+        <div className={style.ButtonWrapper}>
+            <Button onCLickHandler={() => setUser(User.ADMIN)}>views as admin</Button>
+            <Button onCLickHandler={() => setUser(User.GUEST)}>views as guest</Button>
+        </div>
+
             <h1>Wihlist edit page</h1>
             <Card>
                 {user === User.ADMIN ? interfaceIfAdmin : interfaceIfGuest}
+
+                <div className={style.ButtonWrapper}>
                 {user === User.ADMIN ? <Button red={true}>delete Wishlist</Button> : null}
                 <Button onCLickHandler={handleSaveEditedWishlistChange}>save</Button>
+                </div>
             </Card>
-
-            <p>{JSON.stringify(wishlist)}</p>
-
-            <Button onCLickHandler={() => setUser(User.ADMIN)}>as admin</Button>
-            <Button onCLickHandler={() => setUser(User.GUEST)}>as guest</Button>
-        </div>
+        </>
     )
 }
