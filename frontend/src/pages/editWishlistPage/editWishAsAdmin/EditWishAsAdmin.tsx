@@ -9,7 +9,6 @@ import Select from "../../../components/select/Select";
 type EditWishProps = {
     name: string;
     status: WishStatus;
-    isUserAdmin: boolean;
     wishId: string,
     id: string,
     handleWishesChange: ChangeEventHandler<HTMLInputElement>;
@@ -34,6 +33,3 @@ export default function EditWishAsAdmin(props: EditWishProps) {
         </div>
     )
 }
-/*
-
- */
