@@ -74,7 +74,7 @@ export default function CreateWishlistPage() {
 
                     {wishes.map((wish, index) => (
                         <MoreWishesInput
-                            key={index}
+                            key={wish.wishId}
                             id={index.toString()}
                             value={wish.name}
                             handleWishesChange={handleWishesChange}
