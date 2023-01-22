@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Wishlist} from "../../model/Wishlist";
-import WishlistWrapper from "../../components/wishlistWrapper/WishlistWrapper";
+import WishlistWrapper from "./wishlistWrapper/WishlistWrapper";
 import axios from "axios";
 import Card from "../../components/card/Card";
 import {WishStatus} from "../../model/WishStatus";
@@ -45,11 +45,10 @@ export default function WishlistGalleryPage(){
         getWishlist();
     }
 
-    return( <div>
+    return( <>
         <h1>See all Wishlists</h1>
-
-            {wishlists.map(wishlist => <Card><WishlistWrapper key={wishlist.wishlistId} deleteWishlist={handleDeleteChange} name={wishlist.name} wishlistId={wishlist.wishlistId!} wishes={wishlist.wishes}></WishlistWrapper></Card> )}
-        </div>
+            {wishlists.map(wishlist => <Card key={wishlist.wishlistId}><WishlistWrapper key={wishlist.wishlistId} deleteWishlist={handleDeleteChange} name={wishlist.name} wishlistId={wishlist.wishlistId!} wishes={wishlist.wishes}></WishlistWrapper></Card> )}
+        </>
     )
 
 }
