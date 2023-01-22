@@ -8,10 +8,11 @@ import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import EditWishAsGuest from "./editWishAsGuest/EditWishAsGuest";
 import style from "./EditWishlistPage.module.scss"
+import {useNavigate} from "react-router-dom";
 
 export default function EditWishlistPage() {
     const [user, setUser] = useState<User>(User.ADMIN);
-
+    const navigate = useNavigate();
     const [wishlist, setWishlist] = useState<Wishlist>({
         wishlistId: 'id123', name: 'Samuel Geburtstag', wishes: [
             {name: 'Pi', status: WishStatus.FREE, wishId: '123'},
@@ -59,7 +60,11 @@ export default function EditWishlistPage() {
     }, [])
 
     const handleSaveEditedWishlistChange = useCallback(() => {
-        //  saving stuff to database
+        //  saving stuff to database, then redirect to wishlist gallery
+
+        navigate('/wishlist-gallery');
+
+
     }, []);
 
     const interfaceIfAdmin = <>
