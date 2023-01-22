@@ -1,4 +1,4 @@
-import {ChangeEventHandler} from "react";
+import {ChangeEventHandler, useCallback} from "react";
 import Input from "../../../components/input/Input";
 import Button from "../../../components/button/Button";
 import {ImBin} from "react-icons/im";
@@ -13,16 +13,14 @@ interface MoreWishesInputProps {
 
 const MoreWishesInput = (props: MoreWishesInputProps) => {
 
-
-    function removeHandler() {
+    const removeHandler = useCallback(() => {
         props.handleWishRemoveChange(props.id);
-    }
-
+    }, []);
 
     return (
         <div className={style.MoreWishList}>
             <div className={style.InputWrapper}>
-            <Input id={props.id}  changeWishHandler={props.handleWishesChange} value={props.value}></Input>
+                <Input id={props.id} changeWishHandler={props.handleWishesChange} value={props.value}></Input>
             </div>
             <Button type="button" red={true} fixed={true} onCLickHandler={removeHandler}>
                 <ImBin></ImBin>
@@ -30,9 +28,5 @@ const MoreWishesInput = (props: MoreWishesInputProps) => {
         </div>
     );
 };
-
-/*
-
- */
 
 export default MoreWishesInput;

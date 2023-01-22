@@ -1,5 +1,5 @@
 import {WishStatus} from "../../../model/WishStatus";
-import React, {ChangeEvent, ChangeEventHandler} from "react";
+import React, {ChangeEvent, ChangeEventHandler, useCallback} from "react";
 import style from "./EditWishAsAdmin.module.scss";
 import Input from "../../../components/input/Input";
 import Button from "../../../components/button/Button";
@@ -17,9 +17,9 @@ type EditWishProps = {
 }
 export default function EditWishAsAdmin(props: EditWishProps) {
 
-    function removeHandler() {
+    const removeHandler = useCallback(() => {
         props.handleWishRemoveChange(props.id);
-    }
+    }, []);
 
     return (
         <div className={style.EditWishAsAdmin}>

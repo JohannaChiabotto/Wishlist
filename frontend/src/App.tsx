@@ -17,7 +17,7 @@ function App() {
                     <Route path={"/"} element={<Home/>}/>
                     <Route path={"/create-wishlist"} element={<CreateWishlistPage/>}/>
                     <Route path={"/wishlist-gallery"} element={<WishlistGalleryPage/>}/>
-                    <Route path={"/wishlistid"} element={<EditWishlistPage/>}/>
+                    <Route path={"/wishlist/:id"} element={<EditWishlistPage/>}/>
                     <Route path={"/login"} element={<LoginOrRegister/>}/>
                     <Route path={"*"} element={<Home/>}/>
                 </Routes>
