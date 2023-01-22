@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {Wish} from "../../model/Wish";
 import {WishStatus} from "../../model/WishStatus";
 import {Wishlist} from "../../model/Wishlist";
@@ -16,36 +16,36 @@ export default function CreateWishlistPage() {
         {name: '', status: WishStatus.FREE},
     ]);
 
-    function handleWishlistNameChange(event: React.FormEvent<HTMLInputElement>) {
+    const handleWishlistNameChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
         setName(event.currentTarget.value);
-    }
+    }, []);
 
-    function handleAddWishToListChange() {
+    const handleAddWishToListChange = useCallback(() => {
         setWishes((prevState) => {
             const newState = [...prevState];
             newState.push({name: '', status: WishStatus.FREE});
             return newState;
         });
-    }
+    }, []);
 
-    function handleRemoveWishFromListChange(id: string) {
+    const handleRemoveWishFromListChange = useCallback((id: string) => {
 
         setWishes((prevState) => {
             const newState = [...prevState];
-            const filteredState = newState.filter((wish, index) => index !== +id);
-            return filteredState;
+            return newState.filter((wish, index) => index !== +id);
         });
-    }
+    }, []);
 
-    function handleWishesChange(event: React.FormEvent<HTMLInputElement>) {
+    const handleWishesChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
         const value = event.currentTarget.value;
         const id = event.currentTarget.id;
-        console.log(value, id);
 
-        setWishes(
-            wishes.map((wish, index) => (index === +id ? {...wish, name: value} : wish))
+        setWishes(prevState => {
+                const newWishes = [...prevState];
+                return newWishes.map((wish, index) => (index === +id ? {...wish, name: value} : wish))
+            }
         );
-    }
+    }, []);
 
     function handleSubmitChange(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
