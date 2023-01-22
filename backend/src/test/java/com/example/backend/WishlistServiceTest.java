@@ -13,7 +13,7 @@ import java.util.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import static org.mockito.Mockito.*;
 
 
@@ -64,7 +64,7 @@ class WishlistServiceTest {
     }
 
     @Test
-    void deleteWishlist() throws IllegalAccessException {
+    void deleteWishlist() {
         //GIVEN
         Wishlist givenWishlist = new Wishlist("testId", "aaa",wishes);
         doNothing().when(wishlistRepo).delete(givenWishlist);
@@ -103,10 +103,10 @@ class WishlistServiceTest {
 
                 )
         );
-        WishlistService wislistService = new WishlistService(WishlistRepo, IdService);
+        WishlistService wishlistService = new WishlistService(idService, wishlistRepo);
 
         //WHEN
-        List<Wishlist> actual = wishlistService.search("Ni");
+        List<Wishlist> actual = wishlistService.search("Samu");
 
         //THEN
         assertThat(actual, containsInAnyOrder(
