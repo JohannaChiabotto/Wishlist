@@ -1,11 +1,12 @@
 import React from 'react';
-import HomePage from "./pages/home/HomePage";
+import Home from "./pages/home/Home";
 import NavigationBar from "./components/navigationBar/NavigationBar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import AddWishlist from "./pages/createWishlist/addWishlist/AddWishlist";
 import WishlistGalleryPage from "./pages/wishlistGallery/WishlistGalleryPage";
 import EditWishlistPage from "./pages/editWishlistPage/EditWishlistPage";
 import Container from "./components/container/Container";
+import LoginOrRegister from "./pages/loginOrRegister/LoginOrRegister";
+import CreateWishlistPage from "./pages/createWishlist/CreateWishlistPage";
 
 function App() {
     return (
@@ -13,11 +14,12 @@ function App() {
             <NavigationBar></NavigationBar>
             <Container>
                 <Routes>
-                    <Route path={"/"} element={<HomePage/>}/>
-                    <Route path={"/create-wishlist"} element={<AddWishlist/>}/>
+                    <Route path={"/"} element={<Home/>}/>
+                    <Route path={"/create-wishlist"} element={<CreateWishlistPage/>}/>
                     <Route path={"/wishlist-gallery"} element={<WishlistGalleryPage/>}/>
                     <Route path={"/wishlistid"} element={<EditWishlistPage/>}/>
-                    <Route path={"*"} element={<HomePage/>}/>
+                    <Route path={"/login"} element={<LoginOrRegister/>}/>
+                    <Route path={"*"} element={<Home/>}/>
                 </Routes>
             </Container>
         </BrowserRouter>
