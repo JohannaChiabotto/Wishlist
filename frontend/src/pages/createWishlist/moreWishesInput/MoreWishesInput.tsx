@@ -1,6 +1,6 @@
 import {ChangeEventHandler} from "react";
-import Input from "../input/Input";
-import Button from "../button/Button";
+import Input from "../../../components/input/Input";
+import Button from "../../../components/button/Button";
 import {ImBin} from "react-icons/im";
 import style from './MoreWishesInput.module.scss';
 
