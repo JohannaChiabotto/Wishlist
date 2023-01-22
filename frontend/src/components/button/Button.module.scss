@@ -16,17 +16,17 @@
   display: inline-block;
   text-decoration: none;
 
-  @media (min-width: $mobile ) {
+  @media (min-width: $mobile) {
     width: auto;
   }
-  
+
   &:hover {
     background: $dark-green;
   }
 }
 
 .ButtonFixed {
-    width: auto;
+  width: auto;
 }
 
 .ButtonRed {
@@ -34,5 +34,18 @@
 
   &:hover {
     background: $dark-red;
+  }
+}
+
+.ButtonBlack {
+  background: $grey-700;
+
+  svg {
+    margin-right: 6px;
+    transform: translateY(4px);
+  }
+
+  &:hover {
+    background: $grey-800;
   }
 }
