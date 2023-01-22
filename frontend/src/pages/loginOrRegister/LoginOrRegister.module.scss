@@ -1,0 +1,53 @@
+@import "src/assets/style/Variables";
+
+.Wrapper {
+  display: flex;
+  flex-flow: column;
+  @media (min-width: $mobile) {
+    flex-flow: row;
+    align-items: center;
+  }
+}
+
+.WrapperForm {
+  @media (min-width: $mobile) {
+    width: 45%;
+  }
+}
+
+.WrapperButton {
+  margin-top: 40px;
+  text-align: center;
+
+  p {
+    margin-bottom: 16px;
+  }
+
+  @media (min-width: $mobile) {
+    margin-top: 0;
+    padding-left: 30px;
+    width: 55%;
+  }
+}
+
+.ButtonWrapper {
+  margin-top: 20px;
+  display: flex;
+  flex-flow: column;
+  gap: 12px;
+  @media (min-width: $mobile) {
+    flex-flow: row;
+  }
+}
+
+.Paragraph {
+  margin-bottom: 20px;
+}
+
+.Subtitle {
+  margin-bottom: 12px;
+}
+
+.InputWrapper {
+  margin-bottom: 12px;
+}
