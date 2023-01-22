@@ -10,6 +10,8 @@ import LoginOrRegister from "./pages/loginOrRegister/LoginOrRegister";
 import CreateWishlistPage from "./pages/createWishlist/CreateWishlistPage";
 
 function App() {
+
+
     return (
         <BrowserRouter>
             <NavigationBar></NavigationBar>
