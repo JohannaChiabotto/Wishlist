@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/users/oauth")
-public class UserController {
+public class UserControllerOauth {
 
     private final GithubService githubService;
 
-    public UserController(GithubService githubService) {
+    public UserControllerOauth(GithubService githubService) {
         this.githubService = githubService;
     }
 
