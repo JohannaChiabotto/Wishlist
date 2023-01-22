@@ -67,6 +67,10 @@ export default function EditWishlistPage() {
 
     }, []);
 
+    const handleTypeOfUserChange = useCallback((isAdmin: boolean):void => {
+        isAdmin ? setUser(User.ADMIN) : setUser(User.GUEST);
+    }, []);
+
     const interfaceIfAdmin = <>
         <Input id='name' label='Name of List:' changeWishHandler={handleWishlistNameChange}
                value={wishlist.name}></Input>
@@ -102,8 +106,8 @@ export default function EditWishlistPage() {
 
     return (<>
             <div className={style.ButtonWrapper}>
-                <Button onCLickHandler={() => setUser(User.ADMIN)}>views as admin</Button>
-                <Button onCLickHandler={() => setUser(User.GUEST)}>views as guest</Button>
+                <Button onCLickHandler={handleTypeOfUserChange(true)!}>views as admin</Button>
+                <Button onCLickHandler={handleTypeOfUserChange(false)!}>views as guest</Button>
             </div>
 
             <h1>Wihlist edit page</h1>
