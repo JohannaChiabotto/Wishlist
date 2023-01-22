@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import style from '../LoginOrRegister.module.scss';
 import Button from "../../../components/button/Button";
 import Input from "../../../components/input/Input";
+import {BsGithub} from "react-icons/bs";
 
 type LoginProps = {
     handleTypeOfUser: (arg: boolean) => void
@@ -62,7 +63,8 @@ export default function Login(props: LoginProps) {
                                    changeWishHandler={handleLoginChange}></Input>
                         </div>
                         <div className={style.ButtonWrapper}>
-                            <Button type="submit">Save</Button>
+                            <Button type="submit">login</Button>
+                            <Button type="button" black={true}><BsGithub></BsGithub> login mit git</Button>
                         </div>
                     </form>
                 </div>
