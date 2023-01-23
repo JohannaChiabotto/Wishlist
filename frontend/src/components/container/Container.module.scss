@@ -1,11 +1,11 @@
 
 .Container {
   width: 100%;
-  padding: 0 20px;
+  padding: 0 16px;
   margin: 0 auto;
   
   @media (min-width: 1048px) {
-    width: 1008px;
+    width: 1016px;
     padding: 0;
   }
 }

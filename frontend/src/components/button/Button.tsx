@@ -7,7 +7,9 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     type?: 'submit' | 'reset' | 'button';
     fixed?: boolean;
     red?: boolean;
+    darkRed?: boolean;
     black?: boolean;
+
 }
 
 
@@ -21,7 +23,9 @@ const Button = (props: ButtonProps) => {
 
     return (
         <button type={props.type}
-                className={`${style.Button} ${props.red ? style.ButtonRed : ''}
+                className={`${props.cssClasses} ${style.Button} 
+                ${props.red ? style.ButtonRed : ''}
+                ${props.darkRed ? style.ButtonDarkRed : ''}
                  ${props.black ? style.ButtonBlack : ''}
                  ${props.fixed ? style.ButtonFixed  : ''}`}
                 onClick={handleClick}>
