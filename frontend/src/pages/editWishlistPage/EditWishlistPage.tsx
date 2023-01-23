@@ -10,17 +10,13 @@ import EditWishAsGuest from "./editWishAsGuest/EditWishAsGuest";
 import style from "./EditWishlistPage.module.scss"
 import {useNavigate} from "react-router-dom";
 
+const emptyWishlist = {name: "", wishes: []}
+
 export default function EditWishlistPage() {
     const [user, setUser] = useState<User>(User.ADMIN);
     const navigate = useNavigate();
-    const [wishlist, setWishlist] = useState<Wishlist>({
-        wishlistId: 'id123', name: 'Samuel Geburtstag', wishes: [
-            {name: 'Pi', status: WishStatus.FREE, wishId: '123'},
-            {name: 'Pa', status: WishStatus.BOUGHT, wishId: '1234'},
-            {name: 'Po', status: WishStatus.RESERVE, wishId: '456'},
-            {name: 'Bubu', status: WishStatus.FREE, wishId: '768'}
-        ]
-    });
+    const [wishlist, setWishlist] = useState<Wishlist>(emptyWishlist);
+
 
     const handleWishStatusChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
         const id = event.target.id.replace('select-', '');
