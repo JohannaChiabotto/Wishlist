@@ -1,5 +1,3 @@
-import Container from "../../components/container/Container";
-
 import Card from "../../components/card/Card";
 import style from "./Home.module.scss";
 import {Link} from "react-router-dom";
@@ -7,7 +5,7 @@ import Button from "../../components/button/Button";
 
 export default function Home() {
     return (
-        <Container>
+        <>
             <h1>Welcome back, Username</h1>
             <Card>
                 <p>Hallo liebe Freunde und Familie!
@@ -23,6 +21,6 @@ export default function Home() {
                     </Link>
                 </div>
             </Card>
-        </Container>
+        </>
     )
 }

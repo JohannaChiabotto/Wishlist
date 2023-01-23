@@ -6,47 +6,98 @@
   text-align: center;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 20px;
   padding: 20px;
   height: 70px;
   position: relative;
   outline: 3px solid $dark-red;
 
-  &:after, &:before{
-    content: '';
-    display: block;
-    width: 20px;
-    border:35px solid $dark-red;
-    z-index: -1;
-    position: absolute;
-    top:15px;
-  }
+  @media (min-width: $mobile) {
+    &:after, &:before {
+      content: '';
+      display: block;
+      width: 20px;
+      border: 35px solid $dark-red;
+      z-index: -1;
+      position: absolute;
+      top: 15px;
+    }
 
- &:before{
-   left: -55px;
-   border-left-color: $yellow;
-  }
-  &:after{
-   right: -55px;
-    border-right-color: $yellow;
-  }
-
-
-  a {
-    color: $yellow;
-    text-decoration: none;
-    padding: 8px 12px;
-    font-size: 22px;
-
-    &:hover {
-      background: $dark-red;
+    &:before {
+      left: -55px;
+      border-left-color: $yellow;
+    }
+    &:after {
+      right: -55px;
+      border-right-color: $yellow;
     }
   }
+
+  a {
+    text-decoration: none;
+  }
+
+  .hamburgerIcon {
+    @media (min-width: $mobile) {
+      display: none;
+    }
+  }
+
+  .navigation {
+    @media (max-width: 599px) {
+      position: absolute;
+      width: calc(100% + 6px);
+      background: $dark-red;
+      left: -3px;
+      right: -3px;
+      top: 70px;
+      display: flex;
+      flex-flow: column;
+      z-index: 200;
+      border: 3px solid $dark-red;
+      border-top: none;
+    }
+    list-style: none;
+
+    @media (min-width: $mobile) {
+
+      align-items: center;
+    }
+
+    li {
+      display: inline-flex;
+    }
+
+    a {
+      color: $yellow;
+      display: inline-flex;
+      padding: 8px 12px;
+      font-size: 22px;
+      width: 100%;
+
+      &:hover {
+        background: $red;
+      }
+
+      @media (min-width: $mobile) {
+        &:hover {
+          background: $dark-red;
+        }
+      }
+    }
+  }
+
 
   .logo {
     font-size: 24px;
     color: $yellow;
     display: inline-flex;
+    cursor: pointer;
+
+    &:hover {
+      background: $red;
+    }
 
     .icon {
       margin: -4px 4px 0 0;
