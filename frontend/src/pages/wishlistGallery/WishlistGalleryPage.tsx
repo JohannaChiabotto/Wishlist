@@ -1,4 +1,4 @@
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {Wishlist} from "../../model/Wishlist";
 import WishlistWrapper from "./wishlistWrapper/WishlistWrapper";
 import axios from "axios";
@@ -8,17 +8,27 @@ import Card from "../../components/card/Card";
 export default function WishlistGalleryPage() {
     const [wishlists, setWishlists] = useState<Array<Wishlist>>([])
 
+    useEffect(() => {
+        getWishlist()
+    }, []);
+
     function getWishlist() {
-        axios.get("/wishlists")
+        axios.get("/api/wishlist")
             .then(response => {
                 setWishlists(response.data)
             })
             .catch(console.error)
     }
 
-    const handleDeleteChange = useCallback(() => {
-        getWishlist();
+    const handleDeleteChange = useCallback((id: string) => {
+        axios.delete(`/api/wishlist/${id}`)
+            .then(() => {
+                     getWishlist()
+                }
+            )
+            .catch(console.error)
     }, []);
+
 
     return (<>
             <h1>See all Wishlists</h1>
@@ -32,6 +42,4 @@ export default function WishlistGalleryPage() {
                 </Card>)}
         </>
     )
-}
-
 }
