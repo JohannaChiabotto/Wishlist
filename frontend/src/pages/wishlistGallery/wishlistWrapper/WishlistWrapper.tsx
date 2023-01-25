@@ -1,32 +1,27 @@
 import React, {useCallback} from "react";
-import axios from "axios";
 import {Wish} from "../../../model/Wish";
 import {NavLink} from "react-router-dom";
 import Button from "../../../components/button/Button";
 import style from './wishlistwrapper.module.scss';
 import {WishStatus} from "../../../model/WishStatus";
 
-
 type WishlistProps = {
     name: string,
     wishlistId: string,
     wishes: Array<Wish>,
-    deleteWishlist: () => void
+    deleteWishlist: (id: string) => void
 }
 export default function WishlistWrapper(props: WishlistProps) {
     const id = props.wishlistId;
-
     const wishes = props.wishes;
     const freeWishes = wishes.filter(wish => wish.status === WishStatus.FREE);
     const reservedWishes = wishes.filter(wish => wish.status === WishStatus.RESERVE);
     const boughtWishes = wishes.filter(wish => wish.status === WishStatus.BOUGHT);
 
     const handleRemoveWishlistChange = useCallback(() => {
-        axios.delete(`/wishlist/${id}`)
-            .then(() => {
-                props.deleteWishlist();
-            }).catch(console.error)
-    },[]);
+        console.log('wrapper, ', id);
+        props.deleteWishlist(id);
+    }, []);
 
     return (
         <div className={style.Wrapper}>
@@ -39,7 +34,7 @@ export default function WishlistWrapper(props: WishlistProps) {
                 <NavLink to={"/wishlist/" + props.wishlistId}>
                     <Button>edit</Button>
                 </NavLink>
-                <Button onClick={handleRemoveWishlistChange}>delete</Button>
+                <Button red={true} onCLickHandler={handleRemoveWishlistChange}>delete</Button>
             </div>
         </div>
     )
