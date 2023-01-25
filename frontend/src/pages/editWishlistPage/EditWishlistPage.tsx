@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {WishStatus} from "../../model/WishStatus";
 import {Wishlist} from "../../model/Wishlist";
 import EditWishAsAdmin from "./editWishAsAdmin/EditWishAsAdmin";
@@ -9,6 +9,7 @@ import Input from "../../components/input/Input";
 import EditWishAsGuest from "./editWishAsGuest/EditWishAsGuest";
 import style from "./EditWishlistPage.module.scss"
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 const emptyWishlist = {name: "", wishes: []}
 
@@ -17,6 +18,15 @@ export default function EditWishlistPage() {
     const navigate = useNavigate();
     const [wishlist, setWishlist] = useState<Wishlist>(emptyWishlist);
 
+
+
+    useEffect(()=>{
+        axios.get("/api/wishlist/{id}")
+        .then(response => {
+            setWishlist(response.data)
+        })
+            .catch(console.error)
+    }, []);
 
     const handleWishStatusChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
         const id = event.target.id.replace('select-', '');
