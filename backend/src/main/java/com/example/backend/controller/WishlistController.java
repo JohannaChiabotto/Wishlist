@@ -24,7 +24,7 @@ public class WishlistController {
         return wishlistService.createWishlist(wishlistRequest);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/wishlists/{id}")
     public Wishlist getWishlist(@PathVariable String id) throws IllegalAccessException {
         return wishlistService.findWishlistById(id);
     }
