@@ -48,8 +48,8 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public Optional<User> geuUserByName(String name){
-        return userRepo.findByName(name);
+    public Optional<User> getUserByUsername(String username){
+        return userRepo.findByName(username);
     }
 
     public Optional<User> getUserById(String id){
