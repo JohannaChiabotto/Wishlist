@@ -27,36 +27,5 @@ export default function useUser(){
             .then(setUserName)
     },[])
 
-    function login(username: string, password: string){
-        return axios.post("/api/users/login", undefined, {
-            auth: {
-                username,
-                password
-            },
-        })
-            .then((result)=> result.data)
-            .then(data => {
-                setUserName(data)
-                return data
-            })
-    }
-
-    function logout() {
-        return axios.post("/api/users/logout")
-            .then((result) => result.data)
-            .then((data) => {
-                setUserName(data)
-                return data
-            })
-
-    }
-
-    function register(username: string, email: string, password: string){
-        axios.post("/api/users/register", {
-            username: username,
-            email: email,
-            password: password
-        }).catch(e => console.error(e))
-    }
-    return {username: userName, login, logout, register}
+    return {username: userName}
 }

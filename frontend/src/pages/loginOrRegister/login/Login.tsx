@@ -3,36 +3,51 @@ import style from '../LoginOrRegister.module.scss';
 import Button from "../../../components/button/Button";
 import Input from "../../../components/input/Input";
 import {BsGithub} from "react-icons/bs";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+
 
 type LoginProps = {
     handleTypeOfUser: (arg: boolean) => void
 }
 
 export default function Login(props: LoginProps) {
-    const [login, setLogin] = useState({
+    const [newUser, setNewUser] = useState({
         username: '',
         password: '',
     });
+    const navigate = useNavigate();
+
 
     const handleLoginChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
         const value = event.currentTarget.value;
         const id = event.currentTarget.id;
 
+
         if (id === 'username') {
-            setLogin(prevState => {
+            setNewUser(prevState => {
                 return {...prevState, username: value}
             });
         } else {
-            setLogin(prevState => {
+            setNewUser(prevState => {
                 return {...prevState, password: value}
             });
         }
-    }, []);
+    }, [newUser]);
 
     const handleSubmitLoginChange = useCallback((event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-    }, []);
+        axios.post("/api/users/login", undefined, {
+            auth: {
+                username: newUser.username,
+                password: newUser.password
+            },
+        })
+            .then((result) => {navigate('/')})
+            .catch(error => console.log(error))
+
+    }, [newUser]);
 
     const redirectToRegister = useCallback(() => {
         props.handleTypeOfUser(false);
@@ -45,12 +60,12 @@ export default function Login(props: LoginProps) {
                 <div className={style.WrapperForm}>
                     <form onSubmit={handleSubmitLoginChange}>
                         <div className={style.InputWrapper}>
-                            <Input id={'username'} label={'your username:'} value={login.username}
+                            <Input id={'username'} label={'your username:'} value={newUser.username}
                                    changeWishHandler={handleLoginChange}></Input>
                         </div>
                         <div className={style.InputWrapper}>
                             <Input id={'password'} label={'your Password:'}
-                                   value={login.password}
+                                   value={newUser.password}
                                    changeWishHandler={handleLoginChange}></Input>
                         </div>
                         <div className={style.ButtonWrapper}>

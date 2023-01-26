@@ -8,9 +8,9 @@ import Container from "./components/container/Container";
 import GithubRedirectPage from "./pages/createWishlist/githubRedirectPage/GithubRedirectPage";
 import LoginOrRegister from "./pages/loginOrRegister/LoginOrRegister";
 import CreateWishlistPage from "./pages/createWishlist/CreateWishlistPage";
+import useUser from "./hooks/useUser";
 
 function App() {
-
 
     return (
         <BrowserRouter>

@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import {WishStatus} from "../../model/WishStatus";
 import {Wishlist} from "../../model/Wishlist";
 import EditWishAsAdmin from "./editWishAsAdmin/EditWishAsAdmin";
-import {User} from "../../model/User";
+import {UserRole} from "../../model/UserRole";
 import Card from "../../components/card/Card";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
@@ -14,14 +14,14 @@ import axios from "axios";
 const emptyWishlist = {name: "", wishes: []}
 
 export default function EditWishlistPage() {
-    const [user, setUser] = useState<User>(User.ADMIN);
+    const [user, setUser] = useState<UserRole>(UserRole.ADMIN);
     const navigate = useNavigate();
     const [wishlist, setWishlist] = useState<Wishlist>(emptyWishlist);
 
 
 
     useEffect(()=>{
-        axios.get("/api/wishlist/{id}")
+        axios.get("/api/wishlist")
         .then(response => {
             setWishlist(response.data)
         })
@@ -74,11 +74,11 @@ export default function EditWishlistPage() {
     }, []);
 
     const setAsAdmin = useCallback(() => {
-         setUser(User.ADMIN) ;
+         setUser(UserRole.ADMIN) ;
     }, []);
 
     const setAsGuest = useCallback(() => {
-         setUser(User.GUEST) ;
+         setUser(UserRole.GUEST) ;
     }, []);
 
     const interfaceIfAdmin = <>
@@ -122,10 +122,10 @@ export default function EditWishlistPage() {
 
             <h1>Wihlist edit page</h1>
             <Card>
-                {user === User.ADMIN ? interfaceIfAdmin : interfaceIfGuest}
+                {user === UserRole.ADMIN ? interfaceIfAdmin : interfaceIfGuest}
 
                 <div className={style.ButtonWrapper}>
-                    {user === User.ADMIN ? <Button red={true}>delete Wishlist</Button> : null}
+                    {user === UserRole.ADMIN ? <Button red={true}>delete Wishlist</Button> : null}
                     <Button onCLickHandler={handleSaveEditedWishlistChange}>save</Button>
                 </div>
             </Card>
