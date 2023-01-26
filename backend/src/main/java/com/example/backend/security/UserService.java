@@ -49,7 +49,7 @@ public class UserService {
     }
 
     public Optional<User> getUserByUsername(String username){
-        return userRepo.findByName(username);
+        return userRepo.findByUsername(username);
     }
 
     public Optional<User> getUserById(String id){
