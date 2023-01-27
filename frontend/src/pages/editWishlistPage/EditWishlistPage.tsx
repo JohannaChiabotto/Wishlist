@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useContext, useState} from "react";
 import {WishStatus} from "../../model/WishStatus";
 import {Wishlist} from "../../model/Wishlist";
 import EditWishAsAdmin from "./editWishAsAdmin/EditWishAsAdmin";
@@ -8,25 +8,20 @@ import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import EditWishAsGuest from "./editWishAsGuest/EditWishAsGuest";
 import style from "./EditWishlistPage.module.scss"
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import {Store} from "../../store/StoreContext";
 
-const emptyWishlist = {name: "", wishes: []}
 
 export default function EditWishlistPage() {
-    const [user, setUser] = useState<UserRole>(UserRole.ADMIN);
+    const [user] = useState<UserRole>(UserRole.ADMIN);
     const navigate = useNavigate();
-    const [wishlist, setWishlist] = useState<Wishlist>(emptyWishlist);
+    const params = useParams();
+    const store = useContext(Store);
+    const wishlistToEdit = store.wishlists.filter(wishlist => wishlist.wishlistId === params.id)
 
+    const [wishlist, setWishlist] = useState<Wishlist>(wishlistToEdit[0]);
 
-
-    useEffect(()=>{
-        axios.get("/api/wishlist")
-        .then(response => {
-            setWishlist(response.data)
-        })
-            .catch(console.error)
-    }, []);
 
     const handleWishStatusChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
         const id = event.target.id.replace('select-', '');
@@ -65,20 +60,22 @@ export default function EditWishlistPage() {
         );
     }, [])
 
+    const handleDeleteWishlistChange = useCallback(() => {
+        axios.delete(`/api/wishlist/${params.id}`)
+            .then(() => {
+                    store.deleteWishlist(params.id!);
+                    navigate('/wishlist-gallery');
+                }
+            )
+            .catch(console.error)
+    }, []);
+
     const handleSaveEditedWishlistChange = useCallback(() => {
         //  saving stuff to database, then redirect to wishlist gallery
 
         navigate('/wishlist-gallery');
 
 
-    }, []);
-
-    const setAsAdmin = useCallback(() => {
-         setUser(UserRole.ADMIN) ;
-    }, []);
-
-    const setAsGuest = useCallback(() => {
-         setUser(UserRole.GUEST) ;
     }, []);
 
     const interfaceIfAdmin = <>
@@ -115,17 +112,13 @@ export default function EditWishlistPage() {
     </>;
 
     return (<>
-            <div className={style.ButtonWrapper}>
-                <Button onCLickHandler={setAsAdmin}>views as admin</Button>
-                <Button onCLickHandler={setAsGuest}>views as guest</Button>
-            </div>
-
-            <h1>Wihlist edit page</h1>
+            <h1>Wishlist "{wishlist.name}"</h1>
             <Card>
                 {user === UserRole.ADMIN ? interfaceIfAdmin : interfaceIfGuest}
 
                 <div className={style.ButtonWrapper}>
-                    {user === UserRole.ADMIN ? <Button red={true}>delete Wishlist</Button> : null}
+                    {user === UserRole.ADMIN ?
+                        <Button red={true} onCLickHandler={handleDeleteWishlistChange}>delete Wishlist</Button> : null}
                     <Button onCLickHandler={handleSaveEditedWishlistChange}>save</Button>
                 </div>
             </Card>
