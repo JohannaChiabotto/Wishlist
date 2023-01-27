@@ -19,9 +19,8 @@ export default function WishlistWrapper(props: WishlistProps) {
     const boughtWishes = wishes.filter(wish => wish.status === WishStatus.BOUGHT);
 
     const handleRemoveWishlistChange = useCallback(() => {
-        console.log('wrapper, ', id);
         props.deleteWishlist(id);
-    }, []);
+    }, [props, id]);
 
     return (
         <div className={style.Wrapper}>
