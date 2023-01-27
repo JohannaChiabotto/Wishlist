@@ -2,11 +2,15 @@ import Card from "../../components/card/Card";
 import style from "./Home.module.scss";
 import {Link} from "react-router-dom";
 import Button from "../../components/button/Button";
+import {useContext} from "react";
+import {Store} from "../../store/StoreContext";
 
 export default function Home() {
+    const store = useContext(Store)
     return (
         <>
-            <h1>Welcome back, Username</h1>
+            {store.user ? <h1>Welcome back, {store.user.username}</h1> : <h1>Welcome on the Whishlist App!</h1>}
+
             <Card>
                 <p>Hallo liebe Freunde und Familie!
                 wie schön, dass ihr eine Liste für uns erstellen wollt, um uns das schenken noch schöner machen zu können!</p>

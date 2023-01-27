@@ -1,10 +1,11 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useContext, useState} from "react";
 import style from '../LoginOrRegister.module.scss';
 import Button from "../../../components/button/Button";
 import Input from "../../../components/input/Input";
 import {BsGithub} from "react-icons/bs";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {Store} from "../../../store/StoreContext";
 
 
 type LoginProps = {
@@ -17,7 +18,7 @@ export default function Login(props: LoginProps) {
         password: '',
     });
     const navigate = useNavigate();
-
+    const store = useContext(Store);
 
     const handleLoginChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
         const value = event.currentTarget.value;
@@ -44,7 +45,20 @@ export default function Login(props: LoginProps) {
                 password: newUser.password
             },
         })
-            .then((result) => {navigate('/')})
+            .then((result) => {
+                const registeredUser = result.data;
+                console.log(registeredUser.wishlist)
+                store.setUser({
+                    username: registeredUser.username,
+                    email: registeredUser.email,
+                    id: registeredUser.id
+                })
+                if (registeredUser.wishlist !== undefined) {
+                    store.setWishlist(registeredUser.wishlist)
+                }
+                navigate('/');
+            })
+
             .catch(error => console.log(error))
 
     }, [newUser]);

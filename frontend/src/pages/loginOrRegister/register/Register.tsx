@@ -1,9 +1,10 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useContext, useState} from "react";
 import style from '../LoginOrRegister.module.scss';
 import Button from "../../../components/button/Button";
 import Input from "../../../components/input/Input";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {Store} from "../../../store/StoreContext";
 
 type RegisterProps = {
     handleTypeOfUser: (arg: boolean) => void
@@ -17,7 +18,7 @@ export default function Register(props: RegisterProps) {
         samePassword: '',
     });
     const navigate = useNavigate();
-
+    const store = useContext(Store);
 
     const handleRegisterChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
 
@@ -54,16 +55,22 @@ export default function Register(props: RegisterProps) {
     const handleSubmitLoginChange = useCallback((event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-
         axios.post("/api/users/register", {
             username: newUser.username,
             email: newUser.email,
             password: newUser.password
-        }).then((data) => {
-            navigate('/')
+        }).then((result) => {
+            const registeredUser = result.data;
+            store.setUser({
+                username: registeredUser.username,
+                email: registeredUser.email,
+                id: registeredUser.id
+            })
+            if(registeredUser.wishlist!== undefined){
+            store.setWishlist( registeredUser.wishlist)
+            }
+            navigate('/');
         }).catch(e => console.error(e))
-
-
     }, [newUser])
 
     const redirectToLogin = useCallback(() => {
