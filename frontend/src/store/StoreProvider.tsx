@@ -23,13 +23,21 @@ const StoreProvider = (props: any) => {
             return prevState.filter(wishlist => wishlist.wishlistId !== id);
         });
     }
+    const handleChangeWishlistChange = (id: string, wishlistChange: Wishlist) => {
+        setWishlists(prevState => {
+            const copyState = [...prevState];
+            return copyState.map( wishlist => wishlist.wishlistId === id ?  {...wishlist, name: wishlistChange.name, wishes:wishlistChange.wishes}: wishlist);
+        });
+    }
 
     const appContext = {
         user: user,
         wishlists: wishlists,
         setUser: handleUsernameChange,
         setWishlist: handleWishlistChange,
-        deleteWishlist: handleWishlistDeleteChange
+
+        deleteWishlist: handleWishlistDeleteChange,
+        changeWishlist: handleChangeWishlistChange
     };
 
     return (

@@ -5,7 +5,7 @@ import Register from "./register/Register";
 
 
 export default function LoginOrRegister() {
-    const [isUserRegistered, setIsUserRegistered] = useState(false);
+    const [isUserRegistered, setIsUserRegistered] = useState(true);
 
     const handleUserChange = useCallback((isRegistered: boolean) => {
         setIsUserRegistered(isRegistered);

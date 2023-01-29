@@ -38,6 +38,7 @@ export default function Login(props: LoginProps) {
 
     const handleSubmitLoginChange = useCallback((event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        event.stopPropagation();
 
         axios.post("/api/users/login", undefined, {
             auth: {
@@ -47,7 +48,6 @@ export default function Login(props: LoginProps) {
         })
             .then((result) => {
                 const registeredUser = result.data;
-                console.log(registeredUser.wishlist)
                 store.setUser({
                     username: registeredUser.username,
                     email: registeredUser.email,

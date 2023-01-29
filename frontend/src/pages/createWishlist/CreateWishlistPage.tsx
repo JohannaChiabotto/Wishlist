@@ -30,7 +30,6 @@ export default function CreateWishlistPage() {
     }, []);
 
     const handleRemoveWishFromListChange = useCallback((id: string) => {
-
         setWishes((prevState) => {
             const newState = [...prevState];
             return newState.filter((wish, index) => index !== +id);
@@ -40,7 +39,6 @@ export default function CreateWishlistPage() {
     const handleWishesChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
         const value = event.currentTarget.value;
         const id = event.currentTarget.id;
-
         setWishes(prevState => {
                 const newWishes = [...prevState];
                 return newWishes.map((wish, index) => (index === +id ? {...wish, name: value} : wish))
@@ -72,14 +70,17 @@ export default function CreateWishlistPage() {
                     <Input id={'name'} label={'Name of List component:'} value={name}
                            changeWishHandler={handleWishlistNameChange}></Input>
 
+
                     {wishes.map((wish, index) => (
-                        <MoreWishesInput
-                            key={wish.wishId!}
-                            id={index.toString()}
-                            value={wish.name}
-                            handleWishesChange={handleWishesChange}
-                            handleWishRemoveChange={handleRemoveWishFromListChange}
-                        />
+
+                            <MoreWishesInput
+                                key={`wish-${index}`}
+                                id={index.toString()}
+                                value={wish.name}
+                                handleWishesChange={handleWishesChange}
+                                handleWishRemoveChange={handleRemoveWishFromListChange}
+                            />
+
                     ))}
 
                     <div className={style.ButtonWrapper}>

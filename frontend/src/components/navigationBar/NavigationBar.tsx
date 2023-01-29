@@ -20,10 +20,8 @@ export default function NavigationBar() {
     }, [])
 
     const handleLogoutChange = () => {
-        console.log('ich willl mich ausloggen');
         axios.post("/api/users/logout")
             .then((result) => {
-                console.log(result);
                 store.setUser(undefined);
                 navigate('/login');
                 return result;

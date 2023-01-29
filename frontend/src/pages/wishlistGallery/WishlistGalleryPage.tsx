@@ -7,20 +7,7 @@ import {Store} from "../../store/StoreContext";
 
 export default function WishlistGalleryPage() {
     const store = useContext(Store);
-   /* const [wishlists, setWishlists] = useState<Array<Wishlist>>([])
 
-    useEffect(() => {
-        getWishlist()
-    }, []);
-
-    function getWishlist() {
-        axios.get("/api/wishlist")
-            .then(response => {
-                setWishlists(response.data)
-            })
-            .catch(console.error)
-    }
-*/
     const handleDeleteChange = useCallback((id: string) => {
         axios.delete(`/api/wishlist/${id}`)
             .then(() => {

@@ -41,8 +41,11 @@ export default function EditWishlistPage() {
     }, []);
 
     const handleWishlistNameChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+
         setWishlist(prevState => {
-            return {...prevState, name: event.target.value}
+            const copyState = {...prevState};
+            copyState.name = event.target.value;
+            return {...copyState}
         });
     }, []);
 
@@ -72,11 +75,11 @@ export default function EditWishlistPage() {
 
     const handleSaveEditedWishlistChange = useCallback(() => {
         //  saving stuff to database, then redirect to wishlist gallery
+        store.changeWishlist(params.id!, wishlist);
 
         navigate('/wishlist-gallery');
 
-
-    }, []);
+    }, [wishlist]);
 
     const interfaceIfAdmin = <>
         <Input id='name' label='Name of List:' changeWishHandler={handleWishlistNameChange}

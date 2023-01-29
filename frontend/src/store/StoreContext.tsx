@@ -8,6 +8,7 @@ interface StoreContext {
     setUser: (user: User | undefined) => void;
     setWishlist: (newWishlist: Wishlist) => void;
     deleteWishlist: (id: string) => void;
+    changeWishlist: (id: string, list:Wishlist) => void;
 }
 
 export const contextDefault: StoreContext = {
@@ -18,6 +19,9 @@ export const contextDefault: StoreContext = {
     setWishlist: (newWishlist: Wishlist) => {
     },
     deleteWishlist: (id: string) => {
+    },
+    changeWishlist: (id: string, list:Wishlist) => {
+
     }
 }
 
