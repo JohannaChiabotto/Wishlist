@@ -8,25 +8,27 @@ import Container from "./components/container/Container";
 import GithubRedirectPage from "./pages/createWishlist/githubRedirectPage/GithubRedirectPage";
 import LoginOrRegister from "./pages/loginOrRegister/LoginOrRegister";
 import CreateWishlistPage from "./pages/createWishlist/CreateWishlistPage";
+import StoreProvider from "./store/StoreProvider";
 
 function App() {
 
-
     return (
-        <BrowserRouter>
-            <NavigationBar></NavigationBar>
-            <Container>
-                <Routes>
-                    <Route path={"/"} element={<Home/>}/>
-                    <Route path={"/create-wishlist"} element={<CreateWishlistPage/>}/>
-                    <Route path={"/wishlist-gallery"} element={<WishlistGalleryPage/>}/>
-                    <Route path={"/wishlist/:id"} element={<EditWishlistPage/>}/>
-                    <Route path={"/login"} element={<LoginOrRegister/>}/>
-                    <Route path={"*"} element={<Home/>}/>
-                    <Route path={"/users/oauth/github"} element={<GithubRedirectPage/>}/>
-                </Routes>
-            </Container>
-        </BrowserRouter>
+        <StoreProvider>
+            <BrowserRouter>
+                <NavigationBar></NavigationBar>
+                <Container>
+                    <Routes>
+                        <Route path={"/"} element={<Home/>}/>
+                        <Route path={"/create-wishlist"} element={<CreateWishlistPage/>}/>
+                        <Route path={"/wishlist-gallery"} element={<WishlistGalleryPage/>}/>
+                        <Route path={"/wishlist/:id"} element={<EditWishlistPage/>}/>
+                        <Route path={"/login"} element={<LoginOrRegister/>}/>
+                        <Route path={"/users/oauth/github"} element={<GithubRedirectPage/>}/>
+                        <Route path={"*"} element={<Home/>}/>
+                    </Routes>
+                </Container>
+            </BrowserRouter>
+        </StoreProvider>
     );
 }
 

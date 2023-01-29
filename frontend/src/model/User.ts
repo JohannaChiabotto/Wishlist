@@ -1,4 +1,5 @@
-export enum User {
-    ADMIN = "ADMIN",
-    GUEST = "GUEST",
+export type User = {
+    id: string,
+    username: string,
+    email: string
 }

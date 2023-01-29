@@ -1,53 +1,77 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useContext, useState} from "react";
 import style from '../LoginOrRegister.module.scss';
 import Button from "../../../components/button/Button";
 import Input from "../../../components/input/Input";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import {Store} from "../../../store/StoreContext";
 
 type RegisterProps = {
     handleTypeOfUser: (arg: boolean) => void
 }
 
 export default function Register(props: RegisterProps) {
-    const [register, setRegister] = useState({
+    const [newUser, setNewUser] = useState({
         username: '',
         email: '',
         password: '',
         samePassword: '',
     });
+    const navigate = useNavigate();
+    const store = useContext(Store);
 
     const handleRegisterChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+
         const value = event.currentTarget.value;
         const id = event.currentTarget.id;
 
         switch (id) {
             case 'username':
-                setRegister(prevState => {
-                    return {...prevState, username: value}
-                });
+                setNewUser(prevState => {
+                        return {...prevState, username: value}
+                    }
+                );
                 break;
             case 'email':
-                setRegister(prevState => {
-                    return {...prevState, email: value}
+                setNewUser(prevState => {
+                    return {...prevState, email: value};
                 });
                 break;
 
             case 'password':
-                setRegister(prevState => {
+                setNewUser(prevState => {
                     return {...prevState, password: value}
                 });
                 break;
             case 'samePassword':
-                setRegister(prevState => {
+                setNewUser(prevState => {
                     return {...prevState, samePassword: value}
                 });
                 break;
         }
 
-    }, []);
+    }, [newUser]);
 
     const handleSubmitLoginChange = useCallback((event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-    }, [])
+
+        axios.post("/api/users/register", {
+            username: newUser.username,
+            email: newUser.email,
+            password: newUser.password
+        }).then((result) => {
+            const registeredUser = result.data;
+            store.setUser({
+                username: registeredUser.username,
+                email: registeredUser.email,
+                id: registeredUser.id
+            })
+            if(registeredUser.wishlist!== undefined){
+            store.setWishlist( registeredUser.wishlist)
+            }
+            navigate('/');
+        }).catch(e => console.error(e))
+    }, [newUser])
 
     const redirectToLogin = useCallback(() => {
         props.handleTypeOfUser(true);
@@ -61,19 +85,19 @@ export default function Register(props: RegisterProps) {
                 <div className={style.WrapperForm}>
                     <form onSubmit={handleSubmitLoginChange}>
                         <div className={style.InputWrapper}>
-                            <Input id={'username'} label={'your username:'} value={register.username}
+                            <Input id={'username'} label={'your username:'} value={newUser.username}
                                    changeWishHandler={handleRegisterChange}></Input>
                         </div>
                         <div className={style.InputWrapper}>
-                            <Input id={'email'} label={'your Email:'} value={register.email}
+                            <Input id={'email'} label={'your Email:'} value={newUser.email}
                                    changeWishHandler={handleRegisterChange}></Input>
                         </div>
                         <div className={style.InputWrapper}>
-                            <Input id={'password'} label={'your password:'} value={register.password}
+                            <Input id={'password'} label={'your password:'} value={newUser.password}
                                    changeWishHandler={handleRegisterChange}></Input>
                         </div>
                         <div className={style.InputWrapper}>
-                            <Input id={'samePassword'} label={'Repeat your password:'} value={register.samePassword}
+                            <Input id={'samePassword'} label={'Repeat your password:'} value={newUser.samePassword}
                                    changeWishHandler={handleRegisterChange}></Input>
                         </div>
                         <div className={style.ButtonWrapper}>

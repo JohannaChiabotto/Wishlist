@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useContext, useState} from "react";
 import {Wish} from "../../model/Wish";
 import {WishStatus} from "../../model/WishStatus";
 import {Wishlist} from "../../model/Wishlist";
@@ -8,13 +8,14 @@ import Input from "../../components/input/Input";
 import MoreWishesInput from "./moreWishesInput/MoreWishesInput";
 import style from "./CreateWishlistPage.module.scss";
 import Button from "../../components/button/Button";
+import {Store} from "../../store/StoreContext";
 
 export default function CreateWishlistPage() {
-
     const [name, setName] = useState('');
     const [wishes, setWishes] = useState<Wish[]>([
         {name: '', status: WishStatus.FREE},
     ]);
+    const store = useContext(Store);
 
     const handleWishlistNameChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
         setName(event.currentTarget.value);
@@ -29,7 +30,6 @@ export default function CreateWishlistPage() {
     }, []);
 
     const handleRemoveWishFromListChange = useCallback((id: string) => {
-
         setWishes((prevState) => {
             const newState = [...prevState];
             return newState.filter((wish, index) => index !== +id);
@@ -39,7 +39,6 @@ export default function CreateWishlistPage() {
     const handleWishesChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
         const value = event.currentTarget.value;
         const id = event.currentTarget.id;
-
         setWishes(prevState => {
                 const newWishes = [...prevState];
                 return newWishes.map((wish, index) => (index === +id ? {...wish, name: value} : wish))
@@ -52,9 +51,8 @@ export default function CreateWishlistPage() {
         const wishlistRequest: Wishlist = {"name": name, "wishes": wishes}
 
         axios.post("/api/wishlist", wishlistRequest)
-
-            .then(response => response.data)
-            .then(() => {
+            .then(response => {
+                store.setWishlist(response.data);
                 setName("")
                 setWishes([])
             })
@@ -72,14 +70,17 @@ export default function CreateWishlistPage() {
                     <Input id={'name'} label={'Name of List component:'} value={name}
                            changeWishHandler={handleWishlistNameChange}></Input>
 
+
                     {wishes.map((wish, index) => (
-                        <MoreWishesInput
-                            key={wish.wishId}
-                            id={index.toString()}
-                            value={wish.name}
-                            handleWishesChange={handleWishesChange}
-                            handleWishRemoveChange={handleRemoveWishFromListChange}
-                        />
+
+                            <MoreWishesInput
+                                key={`wish-${index}`}
+                                id={index.toString()}
+                                value={wish.name}
+                                handleWishesChange={handleWishesChange}
+                                handleWishRemoveChange={handleRemoveWishFromListChange}
+                            />
+
                     ))}
 
                     <div className={style.ButtonWrapper}>

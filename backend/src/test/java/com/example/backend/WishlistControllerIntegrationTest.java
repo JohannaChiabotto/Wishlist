@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -43,7 +44,7 @@ class WishlistControllerIntegrationTest {
                                            "status":"FREE"
                                        }]
                         }
-                                """))
+                                """).with(csrf()))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -61,9 +62,9 @@ class WishlistControllerIntegrationTest {
     @DirtiesContext
     void deleteWishlist_shouldDeleteWishlistIfIdExists_whenDeleteRequestIsSuccessful() throws Exception {
         Wishlist wishlist = new Wishlist(
-                "123", "nametest", Collections.emptyList()
+                "123", "name", Collections.emptyList()
         );
         wishlistRepo.save(wishlist);
-        mockMvc.perform(delete("/api/wishlist/" + wishlist.wishlistId())).andExpect(status().isOk());
+        mockMvc.perform(delete("/api/wishlist/" + wishlist.wishlistId()).with(csrf())).andExpect(status().isOk());
     }
 }
